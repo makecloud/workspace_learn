@@ -1,0 +1,16 @@
+package com.liuyihui.springdemo.model01;
+
+import javax.crypto.spec.SecretKeySpec;
+/**
+ * 
+ * @author liuyihui
+ *
+ */
+public class HMACSHA1 {
+	private static final String HMAC_SHA1 = "HmacSHA1";
+	
+	public byte[] encrypt(byte[] src){
+		SecretKeySpec signingKey=new SecretKeySpec(src, HMAC_SHA1);
+		return null;
+	}
+}

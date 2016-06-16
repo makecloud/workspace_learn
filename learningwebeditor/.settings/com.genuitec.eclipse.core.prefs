@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/lang,WebRoot/plugins,WebRoot/kindeditor-all.js
+validator.Unchecked=

@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <!-- 项目信息 -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.liuyihui.lrn.mybatis</groupId>
+  <artifactId>lrn-springmybatis</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>lrn-springmybatis</name>
+  <url>http://maven.apache.org</url>
+  
+  <!-- 属性信息 -->
+  <properties>
+      <junit.version>3.1.8</junit.version>
+      <spring.version>4.1.3.RELEASE</spring.version>
+      <mysql.version>5.1.33</mysql.version>
+  </properties>
+  
+  <!-- 依赖信息 -->
+  <dependencies>
+  		<!-- 测试相关 -->
+		<dependency>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <version>4.10</version>
+		  <scope>test</scope>
+		</dependency>
+		<!-- spring相关 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>													
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- mysql驱动相关 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<!-- commons相关 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+          <groupId>commons-lang</groupId>
+          <artifactId>commons-lang</artifactId>
+          <version>2.6</version>
+      </dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+	  <dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.2</version>	
+	  </dependency>
+      <!-- 日志相关 -->
+	  <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>slf4j-log4j12</artifactId>
+	      <version>1.7.6</version>
+	  </dependency>
+
+	     <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.4</version>
+		</dependency>
+	<!-- mybatis相关 -->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>3.2.8</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>1.2.4</version>
+	</dependency>
+  </dependencies>
+  
+  <!-- 构建信息 -->
+  <build>
+    <finalName>lrn-springmybatis</finalName>
+  </build>
+  
+</project>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ch14"  extends="struts-default" >
+		<action name="firstusehibernate" class="ch14.action.FirstUseHibernate">
+			<result name="success">
+				/pages/firstusehibernate.jsp
+			</result>
+			<result name="input">
+				/pages/firstusehibernate.jsp
+			</result>		
+		</action>
+	</package>
+	<package name="ch17" extends="struts-default">
+		<action name="addBook" class="ch17_ssh_combine.action.AddBookAction">
+			<result name="success">/pages/addbook.jsp</result>
+			<result name="input">/pages/addbook.jsp</result>
+			
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,4 @@
+
+ch15示例演示如何映射并使用基于主键的一对一关系，在这个例子中涉及了两个表，t_product和t_product_details。
+其中t_product表的id字段和t_product_details的id字段进行关联。行程一对一的关系。与这两个表对应的实体bean
+是Product和ProductDetail。

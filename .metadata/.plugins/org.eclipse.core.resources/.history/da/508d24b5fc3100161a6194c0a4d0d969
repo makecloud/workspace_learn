@@ -1,0 +1,104 @@
+package com.liuyihui.springdemo.model01;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.junit.Test;
+
+public class WeatherConsumer {
+	
+	private String baseUrlStr="http://open.weather.com.cn/data/?areaid=101190101&type=index&date=201511130000&appid=382627";
+	private String publicKey="http://open.weather.com.cn/data/?areaid=101190101&type=index&date=201511130000&appid=382627ecb7964497";
+	private String privateKey="yunge_webapi_data";
+	
+	
+	@Test
+	public void baseJavaNet() throws IOException, InvalidKeyException, NoSuchAlgorithmException{
+		//加密生成密key并base64编码
+		String base64ResultStr = Base64.encodeBase64String(HMACSHA1.encrypt(publicKey.getBytes(), privateKey.getBytes()));
+		System.out.println("生成密key:"+base64ResultStr);// test for deleted
+		
+		String urlSuffix = URLEncoder.encode(base64ResultStr);
+		
+		//url拼接密key
+		URL url=new URL(baseUrlStr+"&key="+urlSuffix);
+		System.out.println("完整url："+url);
+		
+		//建立url连接
+		URLConnection uc = url.openConnection();
+		
+		//连接
+		uc.connect();
+		
+		//获取连接的输入流
+		InputStream is = uc.getInputStream();
+		
+		//获取输入reader
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		
+		//读取内容
+		String line;
+		while ((line = br.readLine())!=null){
+			System.out.println(line);
+		}
+		br.close();
+		is.close();
+		
+		
+	}
+	@Test
+	public void testBase64() throws InvalidKeyException, NoSuchAlgorithmException{
+		
+		String base64Result = Base64.encodeBase64String(HMACSHA1.encrypt(publicKey.getBytes(), privateKey.getBytes()));
+		System.out.println(base64Result);
+		String urlPrefix = URLEncoder.encode(base64ResultStr);
+		System.out.println(urlPrefix);
+	}
+	/**
+	 * 测试使用 commons-httpclient 
+	 * 
+	 * @throws HttpException
+	 * @throws IOException
+	 * @throws InvalidKeyException
+	 * @throws NoSuchAlgorithmException
+	 */
+	@Test
+	public void baseHttpClient() throws HttpException, IOException, InvalidKeyException, NoSuchAlgorithmException{
+		//加密生成密key并base64编码
+		String base64ResultStr = Base64.encodeBase64String(HMACSHA1.encrypt(publicKey.getBytes(), privateKey.getBytes()));
+		
+		String url = baseUrlStr+"&key="+base64ResultStr;
+		
+		HttpClient httpClient = new HttpClient();
+		
+		HttpMethod method =  new GetMethod(publicKey);
+		
+		httpClient.executeMethod(method);
+		
+		//打印服务器返回的状态
+		System.out.println(method.getStatusCode());
+		
+		//打印返回的信息
+		System.out.println(method.getResponseBodyAsString());
+		
+		//释放连接
+		method.releaseConnection();
+		
+	}
+	
+
+	public static void main(String[] args) {
+	}
+}

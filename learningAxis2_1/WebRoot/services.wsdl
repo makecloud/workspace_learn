@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax23="http://util.java/xsd" xmlns:xsd="http://service.lyh.com" xmlns:ax21="http://entity.lyh.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.lyh.com">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://util.java/xsd">
+            <xs:complexType name="Map">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="empty" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entity.lyh.com/xsd">
+            <xs:complexType name="User">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax24="http://util.java/xsd" xmlns:ax22="http://entity.lyh.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.lyh.com">
+            <xs:import namespace="http://entity.lyh.com/xsd"/>
+            <xs:import namespace="http://util.java/xsd"/>
+            <xs:element name="editUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="ax22:User"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="editUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:User"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUsers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="j" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUsersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:anyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUser4Map">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="j" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUser4MapResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:Map"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getUsersRequest">
+        <wsdl:part name="parameters" element="xsd:getUsers"/>
+    </wsdl:message>
+    <wsdl:message name="getUsersResponse">
+        <wsdl:part name="parameters" element="xsd:getUsersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getUser4MapRequest">
+        <wsdl:part name="parameters" element="xsd:getUser4Map"/>
+    </wsdl:message>
+    <wsdl:message name="getUser4MapResponse">
+        <wsdl:part name="parameters" element="xsd:getUser4MapResponse"/>
+    </wsdl:message>
+    <wsdl:message name="editUserRequest">
+        <wsdl:part name="parameters" element="xsd:editUser"/>
+    </wsdl:message>
+    <wsdl:message name="editUserResponse">
+        <wsdl:part name="parameters" element="xsd:editUserResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ManageUserServicePortType">
+        <wsdl:operation name="getUsers">
+            <wsdl:input message="xsd:getUsersRequest" wsaw:Action="urn:getUsers"/>
+            <wsdl:output message="xsd:getUsersResponse" wsaw:Action="urn:getUsersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getUser4Map">
+            <wsdl:input message="xsd:getUser4MapRequest" wsaw:Action="urn:getUser4Map"/>
+            <wsdl:output message="xsd:getUser4MapResponse" wsaw:Action="urn:getUser4MapResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="editUser">
+            <wsdl:input message="xsd:editUserRequest" wsaw:Action="urn:editUser"/>
+            <wsdl:output message="xsd:editUserResponse" wsaw:Action="urn:editUserResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ManageUserServiceSoap11Binding" type="xsd:ManageUserServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getUsers">
+            <soap:operation soapAction="urn:getUsers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUser4Map">
+            <soap:operation soapAction="urn:getUser4Map" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editUser">
+            <soap:operation soapAction="urn:editUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ManageUserServiceSoap12Binding" type="xsd:ManageUserServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getUsers">
+            <soap12:operation soapAction="urn:getUsers" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUser4Map">
+            <soap12:operation soapAction="urn:getUser4Map" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editUser">
+            <soap12:operation soapAction="urn:editUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ManageUserServiceHttpBinding" type="xsd:ManageUserServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getUsers">
+            <http:operation location="ManageUserService/getUsers"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getUsers"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getUsers"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUser4Map">
+            <http:operation location="ManageUserService/getUser4Map"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="getUser4Map"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="getUser4Map"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editUser">
+            <http:operation location="ManageUserService/editUser"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="editUser"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="editUser"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ManageUserService">
+        <wsdl:port name="ManageUserServiceHttpSoap11Endpoint" binding="xsd:ManageUserServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/ManageUserService"/>
+        </wsdl:port>
+        <wsdl:port name="ManageUserServiceHttpSoap12Endpoint" binding="xsd:ManageUserServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/ManageUserService"/>
+        </wsdl:port>
+        <wsdl:port name="ManageUserServiceHttpEndpoint" binding="xsd:ManageUserServiceHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/ManageUserService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

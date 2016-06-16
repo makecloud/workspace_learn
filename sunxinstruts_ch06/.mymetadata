@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="sunxinstruts_ch06"
+  id="myeclipse.1422332374268"
+  context-root="/ch06"
+  j2ee-spec="6.0"
+  archive="sunxinstruts_ch06.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

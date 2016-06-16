@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+ "http://ibatis.apache.org/dtd/ibatis-3-Mapper.dtd" >
+ 
+ <!-- 配置一个接口对应的mapper -->
+ <mapper namespace="com.liuyihui.lrn.mapper.interf.AdminMapper">
+     
+  	<!-- 插入方法对应的配置 -->
+ 	<insert id="addAdmin" parameterType="com.liuyihui.lrn.entity.Admin">
+ 	 	insert into t_admin (userid,username,userpw) 
+ 	 	values(#{userId},#{userName},#{userPw})   
+ 	</insert>
+ 	
+ 	<!-- 更新方法对应的配置 -->
+ 	<update id="updateAdmin" parameterType="com.liuyihui.lrn.entity.Admin">
+ 	    update t_admin a set a.userid=#{userId},a.username=#{userName},a.userpw=#{userPw} 
+ 	    where a.userid=#{userId}  	    
+ 	</update>
+ 	
+ 	<!-- 删除方法对应的配置 -->
+ 	<delete id="deleteById" parameterType="int">
+ 	    delete from t_admin  where userid=#{id}
+ 	</delete>
+ 	
+ 	<!-- 查询方法 对应的配置 -->
+ 	<select id="findById" parameterType="int" resultType="com.liuyihui.lrn.entity.Admin">
+ 	    select t.userPw from t_admin t where t.userid=#{id}
+ 	</select>
+ 	
+ 	<!-- 查询list方法对应的配置 -->
+ 	<select id="findAll" resultType="com.liuyihui.lrn.entity.Admin">
+ 	    select t.username,t.userpw from t_admin t 
+ 	</select>
+ 	
+ 	<!-- ResultMap应用 -->
+ 	<resultMap id="adminMap" type="com.liuyihui.lrn.entity.Entity">
+ 	    <result property="userId" column="userid" jdbcType="INTEGER" javaType="int"/>
+ 	    <result property="userName" column="username" jdbcType="VARCHAR" javaType="string" />
+ 	    <result property="userPassword" column="userpw" jdbcType="VARCHAR" javaType="string" />
+ 	</resultMap>
+ 	<select id="findAllentity" resultMap="adminMap" >
+ 	    select * from t_admin t
+ 	</select>
+ </mapper>
+ 

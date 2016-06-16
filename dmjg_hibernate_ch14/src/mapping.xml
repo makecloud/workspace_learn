@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+	
+<hibernate-mapping>
+	<!-- 将实体类和表联系起来 -->
+	<class name="ch14.entity.MyMessage" table="t_message" >
+		<id name="id" column="id" type="int" />
+		<property name="name" column="name" />
+	</class>
+	
+	<class name="ch15.entity.Employee" table="t_employee">
+		<id name="id" column="id" type="int" />
+		<property name="name" column="name" />
+		<many-to-one name="address" class="ch15.entity.Address" 
+			column="addressid" cascade="all" unique="true" />
+	</class>
+	
+	<class name="ch15.entity.Address" table="t_address">
+		<id name="id" column="id" type="int" />
+		<property name="address" column="address" />
+		<one-to-one name="employee" class="ch15.entity.Employee" property-ref="address"/>
+	</class>
+	
+	<class name="ch17_ssh_combine.entity.Book" table="t_book">
+		<id name="id" column="id" type="int" >
+			<generator class="increment" />
+		</id>
+		<property name="name" column="name"/>
+		<property name="isbn" column="isbn"/>
+		<property name="author" column="author"/>
+		<property name="price" column="price"/>
+	</class>
+</hibernate-mapping>

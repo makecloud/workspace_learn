@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/spring-jdbc.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+        
+   <!-- spring上下文配置文件 -->
+        
+   <!-- 配置数据源 （用mybatis时 注释掉此数据源）-->
+   <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"     
+       destroy-method="close">
+       <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+       <property name="url" value="jdbc:mysql://localhost:3306/test" />
+       <property name="username" value="root" />
+       <property name="password" value="" />
+   </bean>
+   
+   <!-- 继承JdbcDaoSupport 使用daosupport的JDBCTemplate对象-->
+   <bean id="jdbcAdminDao1" class="com.liuyihui.lrn.dao.JdbcAdminDao">
+       <property name="dataSource" ref="myDataSource" />
+   </bean>
+   
+   <!-- 不继承jdbcDaosupport，用spring生成dao bean的同时注入JDBCTemplate属性对象 -->
+   <bean id="jdbcAdminDao2" class="com.liuyihui.lrn.dao.JdbcAdminDao2">
+       <property name="jdbctemplate" ref="jdbcTemplate" />
+   </bean>
+   
+   <!-- 生产对象：spring自带的JDBCTemplate -->
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+       <property name="dataSource" ref="myDataSource" />
+   </bean>
+   
+   <!-- 开启注解方式 -->
+   	<context:annotation-config />
+  	<!--开启spring自动扫描注册bean -->
+	<context:component-scan base-package="com.liuyihui.lrn" />
+	
+	<!-- 配置sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref="myDataSource"/>
+	    <property name="mapperLocations" value="classpath:com/liuyihui/lrn/mapper/*.xml"/>
+	</bean>
+     
+	<!-- 配置mapper实例 （设置自动扫描后不在需要，注释掉）-->
+	<!-- <bean id="adminMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	    <property name="mapperInterface" value="com.liuyihui.lrn.mapper.interf.AdminMapper" />
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean> -->
+	
+	<!-- 配置 自动扫描，生成mapper实例，并注册到spring上下文 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    <property name="basePackage" value="com.liuyihui.lrn.mapper"/>
+	    <!-- 配置按注解扫描 -->
+	    <property name="annotationClass"  value="com.liuyihui.lrn.annotation.MybatisRepository" />
+	</bean>
+	
+</beans>

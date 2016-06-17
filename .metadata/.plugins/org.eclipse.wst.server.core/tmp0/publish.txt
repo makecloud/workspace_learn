@@ -1,5 +1,0 @@
-#Tomcat publish data
-#Sat Mar 19 16:07:27 CST 2016
-org.eclipse.jst.j2ee.server\:/binary\:D\:\\maven\\localRepository\\org\\springframework\\spring-web\\4.1.3.RELEASE\\spring-web-4.1.3.RELEASE.jar=D\:\\apache-tomcat-7.0.53-eclipseuse\\wtpwebapps\\lrn-spring-mvc-demo01\\WEB-INF\\lib\\spring-web-4.1.3.RELEASE.jar
-org.eclipse.jst.j2ee.server\:lrn-spring-mvc-demo01=D\:\\apache-tomcat-7.0.53-eclipseuse\\wtpwebapps\\lrn-spring-mvc-demo01
-org.eclipse.jst.j2ee.server\:lrn-spring-mybatis=D\:\\apache-tomcat-7.0.53-eclipseuse\\wtpwebapps\\lrn-spring-mybatis

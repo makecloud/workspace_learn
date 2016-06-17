@@ -3,3 +3,14 @@
 RemoteSystemsTempFiles/
 Servers/
 target
+.classpath
+.project
+.settings
+.metadata
+.svn
+.git
+bin
+Servers
+tomcat
+RemoteSystemsTempFiles
+logs

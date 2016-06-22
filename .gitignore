@@ -4,6 +4,8 @@ RemoteSystemsTempFiles/
 Servers/
 target
 target/
+*/target
+*/target/
 .classpath
 .project
 .settings
@@ -15,4 +17,4 @@ Servers
 tomcat
 RemoteSystemsTempFiles
 logs
-lrn-spring-demo
+lrn-spring-demo/

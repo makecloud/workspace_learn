@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 云歌天气映射 -->
+<mapper namespace="com.liuyihui.yungeweather.dao.DWeatherDataDao">
+	<!-- 根据指数中文名查指数id -->
+	<select id="getIndexIdByIndexName" resultType="java.lang.Long">
+		select id 
+		from t_weather_index 
+		where name = #{indexName}
+	</select>
+	
+	<!-- 根据指数id和级别中文名查级别id -->
+	<select id="getLevelId" resultType="java.lang.Integer">
+		select id 
+		from t_weather_index_level 
+		where index_id = #{indexId}
+		and name = "舒适"
+	</select>	
+	
+	<!-- 插入天气指数数据 -->
+	<insert id="insertWeatherIndexData" >
+		insert into t_weather_index_data 
+		values
+  		(
+	  		#{wCreate.areaid},
+	  		#{wCreate.indexid},
+	  		#{wCreate.date},
+	  		#{wCreate.hour},
+	  		#{wCreate.level}
+  		)
+	</insert>
+</mapper>

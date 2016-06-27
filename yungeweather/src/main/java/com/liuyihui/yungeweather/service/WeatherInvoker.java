@@ -19,6 +19,12 @@ import org.springframework.stereotype.Service;
 
 import com.liuyihui.yungeweather.util.HMACSHA1;
 
+/**
+ * 天气服务调用类
+ * 
+ * @author liuyh
+ *
+ */
 @Service("weatherInvoker")
 public class WeatherInvoker {
 	/**

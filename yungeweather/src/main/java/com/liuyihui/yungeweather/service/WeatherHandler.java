@@ -1,7 +1,6 @@
 package com.liuyihui.yungeweather.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -16,6 +15,12 @@ import com.liuyihui.yungeweather.vo.WeatherIndex;
 import com.liuyihui.yungeweather.vo.WeatherIndexVo;
 import com.liuyihui.yungeweather.vo.WeatherVo;
 
+/**
+ * 天气处理器
+ * 
+ * @author liuyh
+ *
+ */
 @Service("weatherHandler")
 public class WeatherHandler {
 	@Resource(name = "weatherInvoker")
@@ -23,7 +28,13 @@ public class WeatherHandler {
 	@Resource(name = "dWeatherDataDao")
 	private DWeatherDataDao dWeatherDataDao;
 	
-	public void getTodayWeatherIndex(String areaid) throws Exception{
+	/**
+	 * 收集今天的天气指数
+	 * 
+	 * @param areaid 地区id
+	 * @throws Exception
+	 */
+	public void gatherTodayWeatherIndex(String areaid) throws Exception{
 		//初始化
 		Weather weather = new Weather();
 		weather.setWeatherIndexs(new ArrayList<WeatherIndex>());

@@ -19,7 +19,7 @@ public class TestWeatherHandler {
 	@Test
 	public void testGetTodayWeatherIndex() throws Exception{
 		String areaid = "101190101";
-		weatherHandler.getTodayWeatherIndex(areaid);
+		weatherHandler.gatherTodayWeatherIndex(areaid);
 		
 	}
 }

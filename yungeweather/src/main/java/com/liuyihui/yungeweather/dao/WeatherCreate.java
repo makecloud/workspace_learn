@@ -1,23 +1,23 @@
 package com.liuyihui.yungeweather.dao;
 
 public class WeatherCreate {
-	private long areaId;
-	private long indexId;
+	private Long areaId;
+	private Long indexId;
 	private String date;
-	private String hour;
+	private Integer hour;
 	private Integer level;
 	
 	
-	public long getAreaId() {
+	public Long getAreaId() {
 		return areaId;
 	}
-	public void setAreaId(long areaId) {
+	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
 	}
-	public long getIndexId() {
+	public Long getIndexId() {
 		return indexId;
 	}
-	public void setIndexId(long indexId) {
+	public void setIndexId(Long indexId) {
 		this.indexId = indexId;
 	}
 	public String getDate() {
@@ -26,10 +26,10 @@ public class WeatherCreate {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getHour() {
+	public Integer getHour() {
 		return hour;
 	}
-	public void setHour(String hour) {
+	public void setHour(Integer hour) {
 		this.hour = hour;
 	}
 	public Integer getLevel() {

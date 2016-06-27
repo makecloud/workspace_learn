@@ -16,16 +16,16 @@
 		select id 
 		from t_weather_index_level 
 		where index_id = #{indexId}
-		and name = "舒适"
+		and name = #{indexLevel}
 	</select>	
 	
 	<!-- 插入天气指数数据 -->
-	<insert id="insertWeatherIndexData" >
-		insert into t_weather_index_data 
+	<insert id="insertWeatherIndexData">
+		insert into t_weather_index_data (area_id, index_id, date, hour, level)  
 		values
   		(
-	  		#{wCreate.areaid},
-	  		#{wCreate.indexid},
+	  		#{wCreate.areaId},
+	  		#{wCreate.indexId},
 	  		#{wCreate.date},
 	  		#{wCreate.hour},
 	  		#{wCreate.level}

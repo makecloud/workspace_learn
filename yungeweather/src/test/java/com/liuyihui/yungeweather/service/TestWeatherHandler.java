@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.liuyihui.yungeweather.service.WeatherHandler;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-beans-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring-config-test.xml"})
 public class TestWeatherHandler {
 	
 	@Resource(name = "weatherHandler")

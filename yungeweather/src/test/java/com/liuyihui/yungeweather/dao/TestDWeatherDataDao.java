@@ -16,8 +16,15 @@ public class TestDWeatherDataDao {
 		
 	@Test
 	public void testInsertWeatherIndexData(){
+		WeatherCreate wCreate = new WeatherCreate();
+		wCreate.setAreaId(10L);
+		wCreate.setIndexId(203L);
+		wCreate.setDate("20160622");
+		wCreate.setHour(2);
+		wCreate.setLevel(205);
 		
-//		dWeatherDataDao.insertWeatherIndexData(wCreate);
+		Integer result = dWeatherDataDao.insertWeatherIndexData(wCreate);
+		System.out.println("testInsertWeatherIndexData:"+result);
 	}	
 	@Test
 	public void testGetIndexIdByIndexName(){
@@ -27,7 +34,7 @@ public class TestDWeatherDataDao {
 	}
 	@Test
 	public void testGetLevelIdByIndexIdAndLevelName(){
-		String indexLevel="舒适";
+		String indexLevel="较不宜";
 		Long indexId=2L;
 		try{
 			Integer result = dWeatherDataDao.getLevelId(indexId, indexLevel);

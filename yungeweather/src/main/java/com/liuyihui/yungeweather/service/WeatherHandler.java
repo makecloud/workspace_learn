@@ -51,7 +51,7 @@ public class WeatherHandler {
 			
 			//设置属性
 			weatherIndex.setIndex(weatherIndexVo.getI1());
-			weatherIndex.setIndexName(weatherIndexVo.getI2());
+			weatherIndex.setIndexName(weatherIndexVo.getI2().equals("紫外线强度指数")?"防晒指数":weatherIndexVo.getI2());
 			weatherIndex.setIndexLevel(weatherIndexVo.getI4());
 			
 			//封装
@@ -62,16 +62,23 @@ public class WeatherHandler {
 		
 		//数据入库
 		for(WeatherIndex wIndex : weather.getWeatherIndexs()){
-			
+			System.out.println(wIndex);//to be deleted
 			WeatherCreate weatherCreate = new WeatherCreate();
 			
-			long indexId = dWeatherDataDao.getIndexIdByIndexName(wIndex.getIndexName());
+			Long indexId = dWeatherDataDao.getIndexIdByIndexName(wIndex.getIndexName());
 			Integer levelId = dWeatherDataDao.getLevelId( indexId,wIndex.getIndexLevel());
+			//校验
+			if(indexId == null ){
+				throw new Exception("指数中文名："+wIndex.getIndexName()+",未查到指数id");
+			}
+			if( levelId == null ){
+				throw new Exception("指数中文名："+wIndex.getIndexName()+",指数id："+indexId+",指数级别中文名："+wIndex.getIndexLevel()+",未查到指数级别id");
+			}
 			weatherCreate.setAreaId(Long.parseLong(weather.getAreaid()));
 			weatherCreate.setIndexId(indexId);
 			weatherCreate.setLevel(levelId);
-			weatherCreate.setDate(date);
-			weatherCreate.setHour(weather.getPublishTime().substring(8,10));
+			weatherCreate.setDate(weather.getPublishTime().substring(0,8));
+			weatherCreate.setHour(Integer.parseInt(weather.getPublishTime().substring(8,10)));
 			
 			dWeatherDataDao.insertWeatherIndexData(weatherCreate);
 		}

@@ -27,5 +27,8 @@ public class WeatherIndex implements Serializable{
 	public void setIndexLevel(String indexLevel) {
 		this.indexLevel = indexLevel;
 	}
-	
+	@Override
+	public String toString() {
+		return "index:"+index+",indexName:"+indexName+",indexLevel:"+indexLevel;
+	}
 }

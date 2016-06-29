@@ -31,7 +31,7 @@ public class GetWeatherLiveDataTask implements Job {
 		String invokeResult;
 		try {
 			invokeResult = WeatherInvoker.invokeWeatherApiBaseJavaNet(url,areaId,type,date,appId,privateKey);
-			File f = new File("D:\\cloudsong\\云歌时代_comment\\weatherLiveData3.txt");
+			File f = new File("D:\\cloudsong\\云歌时代_comment\\weatherLiveData_6-29_2.txt");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f,true));
 //			bw.append(invokeResult);
 			bw.write(now+":"+invokeResult+"\n");

@@ -57,7 +57,7 @@ public class QuartzManager {
 			
 			//关闭scheduler
 			scheduler.shutdown();
-			File f = new File("D:\\cloudsong\\云歌时代_comment\\weatherLiveData3.txt");
+			File f = new File("D:\\cloudsong\\云歌时代_comment\\weatherLiveData_6-29_2.txt");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f,true));
 			bw.write("定时任务执行完成！\n");
 			bw.close();

@@ -16,7 +16,7 @@ public class TestDWeatherDataDao {
 		
 	@Test
 	public void testInsertWeatherIndexData(){
-		WeatherCreate wCreate = new WeatherCreate();
+		DWeatherCreate wCreate = new DWeatherCreate();
 		wCreate.setAreaId(10L);
 		wCreate.setIndexId(203L);
 		wCreate.setDate("20160622");

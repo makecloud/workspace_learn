@@ -9,7 +9,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Service;
 
 import com.liuyihui.yungeweather.dao.DWeatherDataDao;
-import com.liuyihui.yungeweather.dao.WeatherCreate;
+import com.liuyihui.yungeweather.dao.DWeatherCreate;
 import com.liuyihui.yungeweather.vo.Weather;
 import com.liuyihui.yungeweather.vo.WeatherIndex;
 import com.liuyihui.yungeweather.vo.WeatherIndexVo;
@@ -74,7 +74,7 @@ public class WeatherHandler {
 		//数据入库
 		for(WeatherIndex wIndex : weather.getWeatherIndexs()){
 			System.out.println(wIndex);//to be deleted
-			WeatherCreate weatherCreate = new WeatherCreate();
+			DWeatherCreate weatherCreate = new DWeatherCreate();
 			
 			Long indexId = dWeatherDataDao.getIndexIdByIndexName(wIndex.getIndexName());
 			Integer levelId = dWeatherDataDao.getLevelId( indexId,wIndex.getIndexLevel());

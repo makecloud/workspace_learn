@@ -1,10 +1,15 @@
 package com.liuyihui.yungeweather.service;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.codec.binary.Base64;
@@ -65,5 +70,30 @@ public class TestWeatherConsumer {
 		System.out.println("base64Result:"+base64Result);
 		String urlsuffix = URLEncoder.encode(base64Result);
 		System.out.println("urlsuffix:"+urlsuffix);
+	}
+	@Test
+	public void testWriteIntoFile(){
+		//参数定义
+				String url="http://open.weather.com.cn/data/";
+				String areaId="101190101";
+				String type="observe";
+				String date="201606201000";
+				String appId="382627ecb7964497";
+				String privateKey="yunge_webapi_data";
+				
+				String now = new SimpleDateFormat("yyyyMMdd:HH时mm分ss秒").format(new Date());
+				String invokeResult;
+				try {
+					invokeResult = WeatherInvoker.invokeWeatherApiBaseJavaNet(url,areaId,type,date,appId,privateKey);
+					File f = new File("D:\\cloudsong\\云歌时代_comment\\weatherLiveData.txt");
+					BufferedWriter bw = new BufferedWriter(new FileWriter(f,true));
+//					bw.append(invokeResult);
+					bw.write(now+":"+invokeResult+"\n");
+					bw.close();
+					
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 	}
 }

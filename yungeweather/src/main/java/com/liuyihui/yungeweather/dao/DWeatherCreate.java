@@ -1,6 +1,6 @@
 package com.liuyihui.yungeweather.dao;
 
-public class WeatherCreate {
+public class DWeatherCreate {
 	private Long areaId;
 	private Long indexId;
 	private String date;

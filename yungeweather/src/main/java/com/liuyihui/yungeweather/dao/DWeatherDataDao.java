@@ -9,7 +9,7 @@ public interface DWeatherDataDao {
 	 * 插入天气指数数据
 	 * @param wCreate
 	 */
-	public Integer insertWeatherIndexData(@Param("wCreate") WeatherCreate wCreate);
+	public Integer insertWeatherIndexData(@Param("wCreate") DWeatherCreate wCreate);
 	/**
 	 * 根据指数中文名，获取指数id
 	 * @param indexName

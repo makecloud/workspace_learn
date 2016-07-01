@@ -20,7 +20,7 @@ public class HMACSHA1 {
 	private static final String HMAC_SHA1 = "HmacSHA1";
 	
 	/**
-	 * 
+	 * 加密方法
 	 * @param src 代加密的字节数据
 	 * @param key 密钥
 	 * @return 加密后的字节数据

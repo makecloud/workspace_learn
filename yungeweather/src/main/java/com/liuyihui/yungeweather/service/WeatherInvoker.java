@@ -40,7 +40,8 @@ public class WeatherInvoker {
 	 * @return 天气服务返回json
 	 * @throws Exception 
 	 */
-	public static String invokeWeatherApiBaseJavaNet(String _url,
+	public static String invokeWeatherApiBaseJavaNet(
+			String _url,
 			String areaId,
 			String type,
 			String date,
@@ -61,6 +62,7 @@ public class WeatherInvoker {
 			
 			//请求url拼接key
 			URL uRL=new URL(url+"&key="+key);
+			System.out.println("最终url："+uRL.toString());
 			
 			//建立url连接
 			URLConnection uc = uRL.openConnection();

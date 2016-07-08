@@ -53,9 +53,9 @@ public class TestWeatherConsumer {
 	@Test
 	public void TestInvokeWeatherApiBaseHttpClient() throws HttpException, IOException, InvalidKeyException, NoSuchAlgorithmException{
 		String url="http://open.weather.com.cn/data/";
-		String areaId="101190101";
+		String areaId="101190102";
 		String type="index";
-		String date="201606221800";
+		String date= new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
 		String appId="382627ecb7964497";
 		String privateKey="yunge_webapi_data";
 		String invokeResult = weatherConsumer.invokeWeatherApiBaseHttpClient(url,areaId,type,date,appId,privateKey);

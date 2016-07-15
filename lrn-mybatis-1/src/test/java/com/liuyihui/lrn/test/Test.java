@@ -43,7 +43,7 @@ public class Test {
     	//开启session
         SqlSession session = sqlSessionFactory.openSession();
         try {
-        	//执行查询
+        	//调用session方法，执行查询
 	        User user = (User) session.selectOne("com.liuyihui.lrn.entity.UserMapper.selectUserByID", 1);
 	        
 	        //打印结果

@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.liuyihui</groupId>
-  <artifactId>lrn-mybatis-1</artifactId>
+  <artifactId>lrn-mybatis-2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>lrn-mybatis-1</name>
+  <name>lrn-mybatis-2</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -33,7 +33,5 @@
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>5.1.6</version>
 	</dependency>
-		
-	    
   </dependencies>
 </project>

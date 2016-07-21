@@ -1,0 +1,14 @@
+
+
+<!-- mybatis映射文件 -->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liuyihui.lrnmybatis2.api.IUser"><!-- namespace跟接口名对应 -->
+	<!-- id跟接口的方法对应 -->
+    <select id="selectUserByID" parameterType="int" resultType="User">
+        select * from user where id = #{id}
+    </select>
+</mapper>

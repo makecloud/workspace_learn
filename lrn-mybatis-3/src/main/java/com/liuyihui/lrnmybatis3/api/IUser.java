@@ -2,6 +2,8 @@ package com.liuyihui.lrnmybatis3.api;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.liuyihui.lrnmybatis3.entity.User;
 
 
@@ -21,5 +23,15 @@ public interface IUser {
 	 * 查询用户实体集合
 	 * @return 
 	 */
-	public List<User> queryUser();
+	public List<User> queryUser(@Param("userName")String userName);
+	/**
+	 * 查询用户实体集合2 测试使用resultMap
+	 * @return 
+	 */
+	public List<User> queryUser2(@Param("userName")String userName);
+	
+	/**
+	 *  插入用户
+	 */
+	public void addUser(@Param("user")User user);
 }

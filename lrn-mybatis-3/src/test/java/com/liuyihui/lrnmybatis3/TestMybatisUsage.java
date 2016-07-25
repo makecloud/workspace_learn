@@ -38,7 +38,7 @@ public class TestMybatisUsage {
 
     
     /**
-     * 使用mybatis mapper查询
+     * 使用mybatis mapper查询方法
      */
     @Test
     public void testQuery() {
@@ -62,7 +62,7 @@ public class TestMybatisUsage {
     }
     
     /**
-     *  测试mybatis mapper插入
+     *  测试mybatis mapper插入方法
      */
     @Test
     public void testAddUser(){
@@ -86,5 +86,11 @@ public class TestMybatisUsage {
     	}finally{
     		sqlSession.close();
     	}
+    }
+    /**
+     *  测试mybatis mapper的删除方法
+     */
+    public void testDeleteUser(){
+    	
     }
 }

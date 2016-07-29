@@ -15,6 +15,10 @@ import com.liuyihui.lrnmybatis3.entity.User;
 
 
 
+/**
+ * mybatis 接口和映射文件搭配使用 增删改查数据库示例：
+ * @author liuyh
+ */
 public class TestMybatisUsage {
 	
 	/** sqlsession工厂 */
@@ -38,7 +42,7 @@ public class TestMybatisUsage {
 
     
     /**
-     * 使用mybatis mapper查询方法
+     * 使用mybatis mapper查询方法示例
      */
     @Test
     public void testQuery() {
@@ -62,7 +66,7 @@ public class TestMybatisUsage {
     }
     
     /**
-     *  测试mybatis mapper插入方法
+     *  使用mybatis mapper插入方法示例
      */
     @Test
     public void testAddUser(){
@@ -88,9 +92,54 @@ public class TestMybatisUsage {
     	}
     }
     /**
-     *  测试mybatis mapper的删除方法
+     *  使用mybatis mapper的更新方法示例
      */
+    @Test
+    public void testUpdateUser(){
+    	//获取sqlsession
+    	SqlSession sqlSession = sqlSessionFactory.openSession();
+    	try{
+    		//创建user
+    		User user = new User();
+    		user.setId(6);
+    		user.setUserName("liuyihui");
+    		user.setUserAge("22");
+    		user.setUserAddress("上地");
+    		
+    		//从session获取mapper实例
+    		IUser userMapper = sqlSession.getMapper(IUser.class);
+    		
+    		//使用mapper实例的插入
+    		userMapper.updateUser(user);
+    		
+    		//提交事务，保证更新
+    		sqlSession.commit();
+    	}finally{
+    		sqlSession.close();
+    	}
+    }
+    /**
+     *  使用mybatis mapper的删除方法示例
+     */
+    @Test
     public void testDeleteUser(){
-    	
+    	//获取sqlsession
+    	SqlSession sqlSession = sqlSessionFactory.openSession();
+    	try{
+    		
+    		//从session获取mapper实例
+    		IUser userMapper = sqlSession.getMapper(IUser.class);
+    		
+    		//使用mapper实例的删除
+    		Integer count = userMapper.deleteUser(6);
+    		
+    		//提交事务，保证更新
+    		sqlSession.commit();
+    		
+    		//打印结果
+    		System.out.println("删除："+count);
+    	}finally{
+    		sqlSession.close();
+    	}
     }
 }

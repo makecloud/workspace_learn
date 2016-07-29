@@ -31,7 +31,15 @@ public interface IUser {
 	public List<User> queryUser2(@Param("userName")String userName);
 	
 	/**
-	 *  插入用户
+	 *  插入用户表的方法。
 	 */
 	public void addUser(@Param("user")User user);
+	/**
+	 *  更新用户表的方法。
+	 */
+	public Integer updateUser(@Param("user")User user);
+	/**
+	 *  删除 用户表记录的方法。
+	 */
+	public Integer deleteUser(@Param("id")Integer id);
 }

@@ -40,5 +40,21 @@
     	insert into user (userName,userAge,userAddress)
     	values (#{user.userName},#{user.userAge},#{user.userAddress})
     </insert>
-    
+    <!-- 
+    	更新标签
+     -->
+    <update id="updateUser">
+    	update user 
+		set
+		  userName = #{user.userName},
+		  userAge = #{user.userAge},
+		  userAddress = #{user.userAddress} 
+		where id =  #{user.id}
+    </update>
+    <!-- 
+    	删除标签
+     -->
+    <delete id="deleteUser">
+    	delete from user where id = #{id}
+    </delete>
 </mapper>

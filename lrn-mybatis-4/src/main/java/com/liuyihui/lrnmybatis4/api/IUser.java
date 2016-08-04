@@ -1,10 +1,10 @@
-package com.liuyihui.lrnmybatis3.api;
+package com.liuyihui.lrnmybatis4.api;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.liuyihui.lrnmybatis3.entity.User;
+import com.liuyihui.lrnmybatis4.entity.User;
 
 
 /**

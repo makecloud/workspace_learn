@@ -12,26 +12,29 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.version>4.1.3.RELEASE</spring.version>
   </properties>
 
   <dependencies>
+  	<!-- 单元测试相关 -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-    <!-- mybatis -->
+    <!-- mybatis框架相关 -->
 	<dependency>
 	    <groupId>org.mybatis</groupId>
 	    <artifactId>mybatis</artifactId>
 	    <version>3.2.8</version>
 	</dependency>
-	<!-- mysql -->
+	<!-- mysql驱动相关 -->
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
 	    <version>5.1.6</version>
 	</dependency>
+    
   </dependencies>
 </project>

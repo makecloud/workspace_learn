@@ -54,11 +54,9 @@
         </property>
         <property name="ignoreAcceptHeader" value="true" />
     </bean>
- 
-    <bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"
-            value="org.springframework.web.servlet.view.JstlView" />
+	<!-- 配置视图解析器bean， -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/jsps/" />
         <property name="suffix" value=".jsp" />
     </bean>

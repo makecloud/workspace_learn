@@ -4,7 +4,7 @@ import java.lang.invoke.ConstantCallSite;
 
 import org.junit.Test;
 
-import com.liuyh.learnEnum.COsType;
+import com.liuyihui.Enum.COsType;
 
 public class TestEnumUsage {
 	

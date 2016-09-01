@@ -1,4 +1,4 @@
-package com.liuyh.learnEnum;
+package com.liuyihui.Enum;
 
 /**
  * 操作系统类型枚举

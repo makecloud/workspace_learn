@@ -28,7 +28,7 @@ import com.liuyihui.yungeweather.util.HMACSHA1;
 @Service("weatherInvoker")
 public class WeatherInvoker {
 	/**
-	 * 调用天气服务
+	 * 调用一次天气服务
 	 * 
 	 * @param _url 固定url
 	 * @param areaId 区域id

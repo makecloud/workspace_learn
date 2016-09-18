@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GeoQuiz</string>
+    <string name="action_settings">Settings</string>
+    <string name="true_button">是</string>
+    <string name="false_button">否</string>
+    <string name="next_button">下一个</string>
+
+    <!-- 问题字符串 -->
+    <string name="question_1">你是谁？</string>
+    <string name="question_2">他是谁？</string>
+    <string name="question_3">她是谁？</string>
+    <string name="question_4">what is new？</string>
+
+    <!-- 第二个activity所用的 -->
+    <string name="cheat_button">Cheat</string>
+    <string name="warning_text">are you sure to do this?</string>
+    <string name="show_answer">Show answer</string>
+    <string name="judgement_toast">Cheating is wrong.</string>
+    <string name="title_activity_cheat">CheatActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_calcu">CalcuActivity</string>
+
+</resources>

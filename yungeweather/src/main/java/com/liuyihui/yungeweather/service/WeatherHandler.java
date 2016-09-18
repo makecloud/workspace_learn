@@ -16,7 +16,7 @@ import com.liuyihui.yungeweather.vo.WeatherIndexVo;
 import com.liuyihui.yungeweather.vo.WeatherVo;
 
 /**
- * 天气处理器
+ * 天气处理器服务
  * 
  * @author liuyh
  *
@@ -29,7 +29,7 @@ public class WeatherHandler {
 	private DWeatherDataDao dWeatherDataDao;
 	
 	/**
-	 * 收集今天的天气指数
+	 * 收集今天的天气指数，入库
 	 * 
 	 * @param areaid 地区id
 	 * @throws Exception

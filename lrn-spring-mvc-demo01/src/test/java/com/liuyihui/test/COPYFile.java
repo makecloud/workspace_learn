@@ -1,8 +1,5 @@
 package com.liuyihui.test;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import com.liuyihui.webapp.util.CMD;
 

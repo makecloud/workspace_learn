@@ -29,15 +29,27 @@ public class TestWeatherConsumer {
 		prop.load(this.getClass().getClassLoader().getResourceAsStream("weather.properties"));
 		System.out.println(prop.toString());
 	}
+	/**
+	 * 单次请求天气服务接口测试
+	 * @throws Exception 
+	 */
 	@Test
 	public void testInvokeWeatherApiBaseJavaNet() throws Exception{
+		//参数初始化
 		String url="http://open.weather.com.cn/data/";
-		String areaId="101190101";
+//		String areaId="101190101";//南京
+//		String areaId="101010100";//北京
+		String areaId="101030100";//天津
+		
 		String type="observe";
 		String date="201606201000";
 		String appId="382627ecb7964497";
 		String privateKey="yunge_webapi_data";
+		
+		//调用
 		String invokeResult = weatherConsumer.invokeWeatherApiBaseJavaNet(url,areaId,type,date,appId,privateKey);
+		
+		//打印天气接口返回的json结果
 		System.out.println("testInvokeWeatherApiBaseJavaNet:"+invokeResult);
 		
 	}

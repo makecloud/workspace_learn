@@ -30,7 +30,7 @@ public class SpringmvcControllerTest {
 	private final String urlpre = "http://localhost:8080/lrn-spring-mvc-demo01/controller2";
 
 	/**
-	 * 发送htt请求（使用了apache httpclient）
+	 * 发送htt请求（使用apache httpclient示例）
 	 * 
 	 * @throws ClientProtocolException
 	 * @throws IOException
@@ -98,6 +98,7 @@ public class SpringmvcControllerTest {
 		response.getBody();
 	}
 
+	// -----以下未知-----//
 	@Test
 	public void main() {
 

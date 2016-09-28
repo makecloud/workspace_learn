@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">刚刚好</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_hello_moon">HelloMoonActivity</string>
+    <string name="play_button_text">播放</string>
+    <string name="stop_button_text">停止</string>
+    <string name="description">刚刚好</string>
+    <string name="go_on_play_text">继续播放</string>
+    <string name="pause_text">暂停</string>
+
+</resources>

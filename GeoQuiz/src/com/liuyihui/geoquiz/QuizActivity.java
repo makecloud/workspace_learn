@@ -1,5 +1,6 @@
 package com.liuyihui.geoquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,9 @@ public class QuizActivity extends Activity {
 	private int currentIndex = 0;
 	/** TAG */
 	private static final String TAG = "QuizActivity";
+	/** extra的key */
+	public static final String EXTRA_ANSWER_IS_TRUE = "com.liuyihui.geoquiz.answer_is_true";
+	private boolean isCheat = false;
 
 	/**
 	 * activity创建逻辑
@@ -36,6 +40,11 @@ public class QuizActivity extends Activity {
 		// ImageView imageView = new ImageView(this);
 		// frameLayout.addView(imageView);
 		setContentView(R.layout.activity_quiz);
+
+		// 标题栏，就是app最上面的栏
+		ActionBar aBar = getActionBar();
+		// 子标题，显示在应用名下面的
+		aBar.setSubtitle("子标题");
 
 		/** 获取组件 */
 		// 获取文本组件
@@ -85,8 +94,13 @@ public class QuizActivity extends Activity {
 		mCheatButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
+				// 将要传递给子activity的intent
 				Intent i = new Intent(getApplicationContext(), CheatActivity.class);
-				startActivity(i);
+				i.putExtra(EXTRA_ANSWER_IS_TRUE, questionBank[currentIndex].isTrueQuestion());
+
+				// startActivity(i);
+				startActivityForResult(i, 0);// 启动子activity
 			}
 		});
 
@@ -101,6 +115,20 @@ public class QuizActivity extends Activity {
 			}
 		});
 
+	}
+
+	/**
+	 * 从子activity返回调用这个方法
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (data != null) {
+			isCheat = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+		}
+		if (isCheat) {
+			Toast.makeText(getApplicationContext(), "已作弊！", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override

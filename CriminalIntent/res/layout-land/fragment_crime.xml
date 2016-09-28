@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CrimeFragment" xmlns:android1="http://schemas.android.com/apk/res/android">
+
+    <!-- 输入框标题 -->
+
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_title_label" />
+    <!-- crime输入框 -->
+
+    <EditText
+        android:id="@+id/crime_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/crime_title_hint" />
+    <!-- details标题 -->
+
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detail_label" />
+    <LinearLayout
+        android1:layout_width="match_parent"
+        android1:layout_height="wrap_content"
+        android1:layout_marginLeft="16dp"
+        android1:layout_marginRight="16dp" >
+
+    	<!-- 显示详细内容的按钮 -->
+        <Button
+            android1:id="@+id/crime_date"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content" />
+
+	    <!-- 复选框 -->
+        <CheckBox
+            android1:id="@+id/crime_solved"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_marginLeft="16dp"
+            android1:layout_marginRight="16dp"
+            android1:text="@string/crime_solved_label" />
+
+    </LinearLayout>
+
+</LinearLayout>

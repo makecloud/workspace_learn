@@ -15,5 +15,6 @@
     <string name="hide_subtitle">隐藏子标题</string>
     <string name="subtitle">子标题</string>
     <string name="delete_crime">删除crime</string>
+    <string name="take">拍照</string>
 
 </resources>

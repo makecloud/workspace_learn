@@ -1,10 +1,9 @@
 package com.example.criminalintent.crimelist;
 
-import android.app.Fragment;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.example.criminalintent.R;
 import com.example.criminalintent.crimedetail.CrimeFragment;
 import com.example.criminalintent.crimedetail.CrimePagerActivity;
@@ -36,10 +35,17 @@ public class CrimeListActivity extends SingleFragmentActivity {
 
 	}
 
+	/**
+	 * 操作栏菜单项被选择
+	 * 
+	 * @param item
+	 * @return
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.new_crime:
+			case R.id.new_crime:// 新建按钮
 				Crime crime = new Crime();
 				CrimeLab.getIntance(getApplicationContext()).addCrime(crime);
 				Intent intent = new Intent(getApplicationContext(), CrimePagerActivity.class);

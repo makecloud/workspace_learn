@@ -1,10 +1,9 @@
 package com.example.criminalintent.crimedetail;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
-
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import com.example.criminalintent.R;
 
 /**
@@ -12,7 +11,8 @@ import com.example.criminalintent.R;
  * 
  * @author liuyh 2016年9月21日
  */
-public abstract class SingleFragmentActivity extends Activity {
+public abstract class SingleFragmentActivity extends FragmentActivity {
+
 	/**
 	 * 创建fragment
 	 * 
@@ -32,12 +32,13 @@ public abstract class SingleFragmentActivity extends Activity {
 		// 设置activity的布局xml
 		setContentView(R.layout.activity_fragment);
 		// 在activity里获取fm
-		FragmentManager fm = getFragmentManager();
+		FragmentManager fm = getSupportFragmentManager();
 		// 使用fm获取fragment，获取为null，则创建fragment，并添加到本activity
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 		if (fragment == null) {
 			fragment = createFragment();
-			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+			fm.beginTransaction().add(R.id.fragmentContainer, fragment)
+					.commit();
 		}
 	}
 }

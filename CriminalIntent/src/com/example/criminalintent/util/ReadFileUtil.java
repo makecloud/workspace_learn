@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
  * 
  * @author liuyh
  */
-public class ReadIO {
+public class ReadFileUtil {
 
 	/**
 	 * 读取inputsteam里的字符串

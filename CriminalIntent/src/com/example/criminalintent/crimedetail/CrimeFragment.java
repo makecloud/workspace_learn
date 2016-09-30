@@ -14,13 +14,16 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import com.example.criminalintent.R;
+import com.example.criminalintent.crimecamra.CrimeCameraActivity;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
 import com.example.criminalintent.util.TimeUtil;
@@ -43,6 +46,8 @@ public class CrimeFragment extends Fragment {
 	private Button dateButton;
 	/** 复选框 */
 	private CheckBox solvedCheckBox;
+	/** 相机按钮 */
+	private ImageButton cameraButton;
 
 	/**
 	 * 用此方法创建crimefragment实例，实现在创建实例时，绑定bundle到fragment
@@ -109,6 +114,8 @@ public class CrimeFragment extends Fragment {
 		// dateButton.setEnabled(false);
 		// 获取复选框
 		solvedCheckBox = (CheckBox) view.findViewById(R.id.crime_solved);
+		// 获取相机按钮
+		cameraButton = (ImageButton) view.findViewById(R.id.imageButton);
 
 		// -----设置控件属性，即时显示-----//
 		titleField.setText(crime.getTitle());
@@ -159,7 +166,15 @@ public class CrimeFragment extends Fragment {
 				dateDialog.show(fm, DATE_DIALOG);
 			}
 		});
+		// 设置相机按钮事件
+		cameraButton.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
+				startActivity(i);
+			}
+		});
 		return view;
 	}
 
@@ -186,7 +201,8 @@ public class CrimeFragment extends Fragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case android.R.id.home:// 这个id代表的是操作栏上的返回按钮，而不是home键
+			case android.R.id.home:// 这个id代表的是操作栏上的返回按钮，而不是home键。
+				// 设置操作栏上的返回键逻辑
 				if (NavUtils.getParentActivityName(getActivity()) != null) {
 					NavUtils.navigateUpFromSameTask(getActivity());
 				}
@@ -204,7 +220,7 @@ public class CrimeFragment extends Fragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		// 设计为在暂停时，将crime数组持久化到json文件
+		// 设计为在crimeFragment暂停时，将crime数组持久化到json文件
 		CrimeLab.getIntance(getActivity().getApplicationContext()).serializeCrimes();
 	}
 }

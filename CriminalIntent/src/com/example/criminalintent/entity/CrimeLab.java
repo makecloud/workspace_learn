@@ -72,7 +72,7 @@ public class CrimeLab {
 	 */
 	public boolean serializeCrimes() {
 		try {
-			serializar.saveCrimes(crimes);
+			serializar.saveCrimes2(crimes);
 			return true;
 		}
 		catch (Exception e) {
@@ -81,7 +81,16 @@ public class CrimeLab {
 		}
 	}
 
-	// -----//
+	/**
+	 * 删除Crime
+	 * 
+	 * @param crime对象
+	 */
+	public void deleteCrime(Crime c) {
+		crimes.remove(c);
+	}
+
+	// ---getter/setter--//
 
 	/**
 	 * 获取crime列表

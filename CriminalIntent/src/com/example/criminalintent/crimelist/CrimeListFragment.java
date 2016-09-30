@@ -2,9 +2,11 @@ package com.example.criminalintent.crimelist;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import android.app.ListFragment;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -13,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
@@ -75,6 +79,14 @@ public class CrimeListFragment extends ListFragment {
 	 * @see android.app.ListFragment#onCreateView(android.view.LayoutInflater,
 	 *      android.view.ViewGroup, android.os.Bundle)
 	 */
+	/**
+	 * @param inflater
+	 * @param container
+	 * @param savedInstanceState
+	 * @return
+	 * @see android.app.ListFragment#onCreateView(android.view.LayoutInflater,
+	 *      android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = super.onCreateView(inflater, container, savedInstanceState);
@@ -84,8 +96,57 @@ public class CrimeListFragment extends ListFragment {
 		}
 		// 获取列表视图
 		ListView listView = (ListView) v.findViewById(android.R.id.list);
-		// 登记长按列表视图浮起上下文菜单
-		registerForContextMenu(listView);
+
+		// 判断sdk版本，大于honeycomb时使用setChoiceMode方法
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			// 登记长按列表视图浮动上下文菜单（说明长按列表时，显示浮动上下文菜单）
+			registerForContextMenu(listView);
+		}
+		else {
+			// 在HONEYCOMB以上的系统版本中，设置为listview的选择模式（即长按列表时，在操作栏上出现一层菜单栏）
+			listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+			// 设置listView多选模式时的事件监听逻辑
+			listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+
+				@Override
+				public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+					return false;
+				}
+
+				@Override
+				public void onDestroyActionMode(ActionMode mode) {}
+
+				@Override
+				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+					mode.getMenuInflater().inflate(R.menu.crime_list_item_context, menu);
+					return true;
+				}
+
+				@Override
+				public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+					switch (item.getItemId()) {
+						case R.id.menu_item_deleteCrime:
+							CrimeAdapter adapter = (CrimeAdapter) getListAdapter();
+							// 遍历
+							for (int i = adapter.getCount() - 1; i >= 0; i--) {
+								if (getListView().isItemChecked(i)) {
+									CrimeLab.getIntance(getActivity().getApplicationContext())
+											.deleteCrime(adapter.getItem(i));
+								}
+							}
+							mode.finish();
+							adapter.notifyDataSetChanged();
+							return true;
+						default:
+							return false;
+					}
+				}
+
+				@Override
+				public void onItemCheckedStateChanged(ActionMode mode, int position, long id,
+						boolean checked) {}
+			});
+		}
 		return v;
 	}
 
@@ -155,10 +216,10 @@ public class CrimeListFragment extends ListFragment {
 	}
 
 	/**
-	 * 创建上下文操作栏菜单（在长按时，浮动出另一层操作栏，叫做上下文操作栏菜单）
+	 * 创建浮动上下文菜单（在长按时，浮动出一层菜单，叫做浮动上下文菜单）
 	 * 
 	 * @param menu
-	 * @param v 从那个视图浮动起的上下文操作栏菜单
+	 * @param v 从哪一个视图浮动起的浮动上下文菜单
 	 * @param menuInfo
 	 * @see android.app.Fragment#onCreateContextMenu(android.view.ContextMenu,
 	 *      android.view.View, android.view.ContextMenu.ContextMenuInfo)
@@ -179,7 +240,7 @@ public class CrimeListFragment extends ListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.show_subtitle:
+			case R.id.show_subtitle:// 显示子标题按钮
 				if (getActivity().getActionBar().getSubtitle() == null) {
 					getActivity().getActionBar().setSubtitle(R.string.subtitle);
 					item.setTitle(R.string.hide_subtitle);
@@ -197,7 +258,7 @@ public class CrimeListFragment extends ListFragment {
 	}
 
 	/**
-	 * 上下文操作栏菜单项被选择
+	 * 浮动上下文菜单项被选择
 	 * 
 	 * @param item
 	 * @return
@@ -205,14 +266,18 @@ public class CrimeListFragment extends ListFragment {
 	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		Crime crime = ((CrimeAdapter) getListAdapter()).getItem(info.position);
+
 		switch (item.getItemId()) {
-		// case :
-		//
-		// return true;
+			case R.id.menu_item_deleteCrime:
+				CrimeLab.getIntance(getActivity().getApplicationContext()).deleteCrime(crime);
+				((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
+				return true;
+
 			default:
 				return super.onContextItemSelected(item);
 		}
-
 	}
 
 	/**
@@ -222,10 +287,25 @@ public class CrimeListFragment extends ListFragment {
 	 */
 	private class CrimeAdapter extends ArrayAdapter<Crime> {
 
+		/**
+		 * 构造方法
+		 * 
+		 * @param crimes
+		 */
 		public CrimeAdapter(ArrayList<Crime> crimes) {
 			super(getActivity(), 0, crimes);
 		}
 
+		/**
+		 * 获得视图
+		 * 
+		 * @param position
+		 * @param convertView
+		 * @param parent
+		 * @return
+		 * @see android.widget.ArrayAdapter#getView(int, android.view.View,
+		 *      android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
@@ -243,7 +323,6 @@ public class CrimeListFragment extends ListFragment {
 			CheckBox solvedcCheckBox = (CheckBox) convertView
 					.findViewById(R.id.crime_list_item_solvedCheckBox);
 			solvedcCheckBox.setChecked(c.isSolved());
-
 			return convertView;
 		}
 

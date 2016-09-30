@@ -3,13 +3,13 @@ package com.example.criminalintent.crimecamra;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import com.example.criminalintent.crimedetail.SingleFragmentActivity;
+import com.example.criminalintent.crimedetail.ActivitySingleFragment;
 
-public class CrimeCameraActivity extends SingleFragmentActivity {
+public class ActivityCrimeCamera extends ActivitySingleFragment {
 
 	@Override
-	protected CrimeCameraFragment createFragment() {
-		return new CrimeCameraFragment();
+	protected FragmentCrimeCamera createFragment() {
+		return new FragmentCrimeCamera();
 	}
 
 	@Override

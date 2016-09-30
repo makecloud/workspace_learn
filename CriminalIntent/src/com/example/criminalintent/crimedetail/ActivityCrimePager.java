@@ -20,7 +20,7 @@ import com.example.criminalintent.entity.CrimeLab;
  * 
  * @author liuyh 2016Äê9ÔÂ22ÈÕ
  */
-public class CrimePagerActivity extends FragmentActivity {
+public class ActivityCrimePager extends FragmentActivity {
 	private ViewPager viewPager;
 	private ArrayList<Crime> crimes;
 
@@ -51,13 +51,13 @@ public class CrimePagerActivity extends FragmentActivity {
 			@Override
 			public Fragment getItem(int arg0) {
 				UUID crimeId = crimes.get(arg0).getId();
-				CrimeFragment fragment = CrimeFragment.newInstance(crimeId);
+				FragmentCrime fragment = FragmentCrime.newInstance(crimeId);
 
 				return fragment;
 			}
 
 		});
-		UUID crimeId = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
+		UUID crimeId = (UUID) getIntent().getSerializableExtra(FragmentCrime.EXTRA_CRIME_ID);
 		for (int i = 0; i < crimes.size(); i++) {
 			if (crimes.get(i).getId().equals(crimeId)) {
 				viewPager.setCurrentItem(i);

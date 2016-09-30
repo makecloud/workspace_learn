@@ -18,6 +18,8 @@ public class Crime {
 	private Date date;
 	/** 是否已解决 */
 	private boolean solved;
+	/** 照片文件名 */
+	private String photoFileName;
 
 	@Override
 	public String toString() {
@@ -94,6 +96,14 @@ public class Crime {
 	 */
 	public void setSolved(boolean solved) {
 		this.solved = solved;
+	}
+
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
 	}
 
 }

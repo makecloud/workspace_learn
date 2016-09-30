@@ -5,18 +5,18 @@ import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.criminalintent.R;
-import com.example.criminalintent.crimedetail.CrimeFragment;
-import com.example.criminalintent.crimedetail.CrimePagerActivity;
-import com.example.criminalintent.crimedetail.SingleFragmentActivity;
+import com.example.criminalintent.crimedetail.FragmentCrime;
+import com.example.criminalintent.crimedetail.ActivityCrimePager;
+import com.example.criminalintent.crimedetail.ActivitySingleFragment;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
 
-public class CrimeListActivity extends SingleFragmentActivity {
+public class ActivityCrimeList extends ActivitySingleFragment {
 
 	@Override
 	protected Fragment createFragment() {
 
-		return new CrimeListFragment();
+		return new FragmentCrimeList();
 	}
 
 	/**
@@ -48,8 +48,8 @@ public class CrimeListActivity extends SingleFragmentActivity {
 			case R.id.new_crime:// ÐÂ½¨°´Å¥
 				Crime crime = new Crime();
 				CrimeLab.getIntance(getApplicationContext()).addCrime(crime);
-				Intent intent = new Intent(getApplicationContext(), CrimePagerActivity.class);
-				intent.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
+				Intent intent = new Intent(getApplicationContext(), ActivityCrimePager.class);
+				intent.putExtra(FragmentCrime.EXTRA_CRIME_ID, crime.getId());
 				startActivityForResult(intent, 0);
 				return true;
 				/*

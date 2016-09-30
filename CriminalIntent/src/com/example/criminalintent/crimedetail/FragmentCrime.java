@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,10 +23,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import com.example.criminalintent.R;
-import com.example.criminalintent.crimecamra.CrimeCameraActivity;
+import com.example.criminalintent.crimecamra.ActivityCrimeCamera;
+import com.example.criminalintent.crimecamra.FragmentCrimeCamera;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
+import com.example.criminalintent.util.CrimeIO;
+import com.example.criminalintent.util.PictureUtils;
 import com.example.criminalintent.util.TimeUtil;
 
 /**
@@ -33,11 +38,12 @@ import com.example.criminalintent.util.TimeUtil;
  * 
  * @author liuyh 2016年9月20日
  */
-public class CrimeFragment extends Fragment {
+public class FragmentCrime extends Fragment {
 
 	public static String EXTRA_CRIME_ID = "extra_crime_id";
 	private static final String DATE_DIALOG = "date_dialog";
 	public static final int REQUEST_CODE = 0;
+	private static final int REQUEST_PHOTO = 1;
 	/** 代表行为的实体 */
 	private Crime crime;
 	/** 输入框 */
@@ -46,6 +52,8 @@ public class CrimeFragment extends Fragment {
 	private Button dateButton;
 	/** 复选框 */
 	private CheckBox solvedCheckBox;
+	/** 照片缩略图 */
+	private ImageView photoImageView;
 	/** 相机按钮 */
 	private ImageButton cameraButton;
 
@@ -55,12 +63,12 @@ public class CrimeFragment extends Fragment {
 	 * @param crimeId
 	 * @return
 	 */
-	public static CrimeFragment newInstance(UUID crimeId) {
+	public static FragmentCrime newInstance(UUID crimeId) {
 		// 创建bundle
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(EXTRA_CRIME_ID, crimeId);
 		// 创建fragment，添加arg，返回fragment
-		CrimeFragment crimeFragment = new CrimeFragment();
+		FragmentCrime crimeFragment = new FragmentCrime();
 		crimeFragment.setArguments(bundle);
 		return crimeFragment;
 	}
@@ -69,7 +77,6 @@ public class CrimeFragment extends Fragment {
 	 * 创建
 	 * 
 	 * @param savedInstanceState
-	 * @see android.app.Fragment#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -97,8 +104,6 @@ public class CrimeFragment extends Fragment {
 	 * @param container
 	 * @param savedInstanceState
 	 * @return
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
-	 *      android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -114,6 +119,8 @@ public class CrimeFragment extends Fragment {
 		// dateButton.setEnabled(false);
 		// 获取复选框
 		solvedCheckBox = (CheckBox) view.findViewById(R.id.crime_solved);
+		// 获取照片view控件
+		photoImageView = (ImageView) view.findViewById(R.id.crime_imageView);
 		// 获取相机按钮
 		cameraButton = (ImageButton) view.findViewById(R.id.imageButton);
 
@@ -159,9 +166,9 @@ public class CrimeFragment extends Fragment {
 				// 获取activity的 fragmentManager
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				// 创建dataPickerFragment（对话框fragment）
-				DatePickerFragment dateDialog = DatePickerFragment.newInstance(crime.getDate());
+				FragmentDatePicker dateDialog = FragmentDatePicker.newInstance(crime.getDate());
 				// 给dataPickerFragment设置目标fragment
-				dateDialog.setTargetFragment(CrimeFragment.this, REQUEST_CODE);
+				dateDialog.setTargetFragment(FragmentCrime.this, REQUEST_CODE);
 				// 显示dataPickerFragment
 				dateDialog.show(fm, DATE_DIALOG);
 			}
@@ -171,22 +178,66 @@ public class CrimeFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
+				Intent i = new Intent(getActivity(), ActivityCrimeCamera.class);
 				startActivity(i);
+				startActivityForResult(i, REQUEST_PHOTO);
 			}
 		});
 		return view;
 	}
 
+	/**
+	 * 把缩放后的图片放到imageView上
+	 */
+	public void showPhoto() {
+		BitmapDrawable b = null;
+		if (crime.getPhotoFileName() != null) {
+			String path = CrimeIO.getAppSDPath() + crime.getPhotoFileName();
+			b = PictureUtils.getScaledDrawable(getActivity(), path);
+		}
+		photoImageView.setImageDrawable(b);
+	}
+
+	/**
+	 * fragment周期-start
+	 */
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (crime.getPhotoFileName() != null)
+			showPhoto();
+	}
+
+	/**
+	 * fragment周期-stop
+	 */
+	@Override
+	public void onStop() {
+		super.onStop();
+		PictureUtils.cleanImageView(photoImageView);
+	}
+
+	/**
+	 * 从其他Activity返回此Activity时，调用
+	 * 
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode != Activity.RESULT_OK)
 			return;
 		if (requestCode == REQUEST_CODE) {
-			Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+			Date date = (Date) data.getSerializableExtra(FragmentDatePicker.EXTRA_DATE);
 			crime.setDate(date);
 			dateButton.setText(TimeUtil.date2String(date, "yyyy-MM-dd HH:mm:ss"));
+		}
+		else if (requestCode == REQUEST_PHOTO) {
+			String photoFileName = data.getStringExtra(FragmentCrimeCamera.EXTRA_PHOTO_FILENAME);
+			crime.setPhotoFileName(photoFileName);
+			showPhoto();
 		}
 
 	}
@@ -196,7 +247,6 @@ public class CrimeFragment extends Fragment {
 	 * 
 	 * @param item
 	 * @return
-	 * @see android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -214,8 +264,6 @@ public class CrimeFragment extends Fragment {
 
 	/**
 	 * fragment生命周期->暂停阶段
-	 * 
-	 * @see android.support.v4.app.Fragment#onPause()
 	 */
 	@Override
 	public void onPause() {

@@ -19,7 +19,7 @@ import android.view.MenuItem;
  * 
  * @author liuyh 2016年9月22日
  */
-public class CrimeActivity extends FragmentActivity {
+public class ActivityCrime extends FragmentActivity {
 
 	/**
 	 * 创建activity
@@ -38,9 +38,9 @@ public class CrimeActivity extends FragmentActivity {
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 		if (fragment == null) {
 			// 先获取activity的intent中的数据
-			UUID crimeId = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
+			UUID crimeId = (UUID) getIntent().getSerializableExtra(FragmentCrime.EXTRA_CRIME_ID);
 			// 创建行为详细crimeFragment
-			fragment = CrimeFragment.newInstance(crimeId);
+			fragment = FragmentCrime.newInstance(crimeId);
 			// 将(行为详细crimeFragment)添加到activity
 			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
 		}

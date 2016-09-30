@@ -11,7 +11,7 @@ import com.example.criminalintent.R;
  * 
  * @author liuyh 2016年9月21日
  */
-public abstract class SingleFragmentActivity extends FragmentActivity {
+public abstract class ActivitySingleFragment extends FragmentActivity {
 
 	/**
 	 * 创建fragment

@@ -22,8 +22,8 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.criminalintent.R;
-import com.example.criminalintent.crimedetail.CrimeFragment;
-import com.example.criminalintent.crimedetail.CrimePagerActivity;
+import com.example.criminalintent.crimedetail.FragmentCrime;
+import com.example.criminalintent.crimedetail.ActivityCrimePager;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
 
@@ -32,7 +32,7 @@ import com.example.criminalintent.entity.CrimeLab;
  * 
  * @author liuyh 2016年9月21日
  */
-public class CrimeListFragment extends ListFragment {
+public class FragmentCrimeList extends ListFragment {
 
 	/** 行为列表 */
 	private ArrayList<Crime> crimes;
@@ -169,9 +169,9 @@ public class CrimeListFragment extends ListFragment {
 
 		// 从fragment里启动另一个activity
 		// Intent intent = new Intent(getActivity(), CrimeActivity.class);
-		Intent intent = new Intent(getActivity(), CrimePagerActivity.class);
+		Intent intent = new Intent(getActivity(), ActivityCrimePager.class);
 
-		intent.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
+		intent.putExtra(FragmentCrime.EXTRA_CRIME_ID, crime.getId());
 		startActivity(intent);
 	}
 

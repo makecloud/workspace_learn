@@ -26,7 +26,7 @@ import android.widget.DatePicker.OnDateChangedListener;
  * 
  * @author liuyh 2016年9月23日
  */
-public class DatePickerFragment extends DialogFragment {
+public class FragmentDatePicker extends DialogFragment {
 	public static final String EXTRA_DATE = "com.example.criminalintent.date";
 
 	/** 行为发生日期 */
@@ -38,11 +38,11 @@ public class DatePickerFragment extends DialogFragment {
 	 * @param date
 	 * @return
 	 */
-	public static DatePickerFragment newInstance(Date date) {
+	public static FragmentDatePicker newInstance(Date date) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(EXTRA_DATE, date);
 
-		DatePickerFragment datePickerFragment = new DatePickerFragment();
+		FragmentDatePicker datePickerFragment = new FragmentDatePicker();
 		datePickerFragment.setArguments(bundle);
 		return datePickerFragment;
 	}

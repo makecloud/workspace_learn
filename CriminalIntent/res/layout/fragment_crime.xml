@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CrimeFragment" xmlns:android1="http://schemas.android.com/apk/res/android">
+    tools:context=".FragmentCrime" xmlns:android1="http://schemas.android.com/apk/res/android">
 	<!-- 不道德行为明细布局xml ，从属于CrimeFragment类 -->
 	
 	<LinearLayout android:baselineAligned="false" 
@@ -20,7 +20,13 @@
 	    	android:layout_height="wrap_content"
 	    	android:orientation="vertical"
 	    	android:layout_marginRight="4dp">
-
+	    	<ImageView 
+		    	android:id="@+id/crime_imageView"
+	    	    android:layout_width="80dp"
+	    	    android:layout_height="80dp"
+	    	    android:scaleType="centerInside"
+	    	    android:background="@android:color/darker_gray"
+	    	    android:cropToPadding="true"/>
 	    	<ImageButton
 	    	    android:id="@+id/imageButton"
 	    	    android:layout_width="match_parent"

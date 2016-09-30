@@ -3,6 +3,7 @@ package com.example.criminalintent.util;
 import java.io.File;
 import java.io.IOException;
 import android.os.Environment;
+import android.util.Log;
 
 /**
  * 文件处理工具类
@@ -11,13 +12,15 @@ import android.os.Environment;
  */
 public class CrimeIO {
 
+	private static final String tag = "CrimeIO";
+
 	/**
 	 * 获取sd卡上的本应用目录,如不存在本应用文件夹则创建.
 	 * 
 	 * @return /storage/emulated/0/crime/
 	 * @throws IOException
 	 */
-	public static String getAppSDPath() throws IOException {
+	public static String getAppSDPath() {
 		String SDPath = null;
 		// Environment.getExternalStorageDirectory().getAbsolutePath()：/storage/emulated/0
 		// 判断外部存储可用
@@ -32,7 +35,12 @@ public class CrimeIO {
 			SDPath = appDir.getAbsolutePath() + "/";
 		}
 		if (SDPath == null) {
-			throw new IOException("获取sd卡目录为空");
+			try {
+				throw new IOException("获取sd卡目录为空");
+			}
+			catch (IOException e) {
+				Log.e(tag, e.getMessage(), e);
+			}
 		}
 		return SDPath;
 	}

@@ -44,6 +44,7 @@ public class FragmentCrime extends Fragment {
 	private static final String DATE_DIALOG = "date_dialog";
 	public static final int REQUEST_CODE = 0;
 	private static final int REQUEST_PHOTO = 1;
+	private static final String DIALOG_IMAGE = "image_dialog";
 	/** 代表行为的实体 */
 	private Crime crime;
 	/** 输入框 */
@@ -179,8 +180,21 @@ public class FragmentCrime extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getActivity(), ActivityCrimeCamera.class);
-				startActivity(i);
 				startActivityForResult(i, REQUEST_PHOTO);
+			}
+		});
+		// 设置照片缩略图控件的单击事件逻辑
+		photoImageView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String photeFilename = crime.getPhotoFileName();
+				if (photeFilename == null) {
+					return;
+				}
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				FragmentCrimePhotoDialog.getInstance(CrimeIO.getAppSDPath() + photeFilename).show(
+						fm, DIALOG_IMAGE);
 			}
 		});
 		return view;

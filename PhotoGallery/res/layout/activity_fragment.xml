@@ -1,4 +1,4 @@
-<!-- Activity的通用容器布局，用于存放fragment -->
+<!-- 通用容器布局，用于存放fragment -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentContainer"

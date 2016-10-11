@@ -4,55 +4,46 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.MessageFormat;
-import java.util.concurrent.Callable;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.os.AsyncTask;
 import com.alibaba.fastjson.JSON;
 import com.example.logindemo.entity.ApiResponse;
 import com.example.logindemo.entity.LoginData;
-import com.example.logindemo.exception.YungeException;
 import cz.msebera.android.httpclient.client.methods.CloseableHttpResponse;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
 import cz.msebera.android.httpclient.client.methods.HttpUriRequest;
 import cz.msebera.android.httpclient.impl.client.CloseableHttpClient;
 import cz.msebera.android.httpclient.impl.client.HttpClients;
 
-/**
- * 登录工具类
- * 
- * @author liuyh 2016年10月8日
- */
-public class Login implements Callable<ApiResponse> {
+public class LoginUtil extends AsyncTask<String, Integer, ApiResponse> {
 
-	/** 登录url常量 */
+	/** 登录url */
 	private static final MessageFormat URL_FORMATE = new MessageFormat(
 			"http://192.168.1.151:8080/platform-mobile/system/login?phone={0}&password={1}");
-	/** 响应实体的键值常量 */
-	public static final String EXTRA_BUNDLE_APIRESPONSE = "apiResponse";
-	/** 电话号 */
-	private String phone;
-	/** 密码 */
-	private String password;
-	/** 消息处理器 */
-	private Handler handler = null;
+	private ApiResponse resp;
 
-	public Login(String phone, String password, Handler handler) {
-		this.phone = phone;
-		this.password = password;
-		this.handler = handler;
+	public LoginUtil(ApiResponse resp) {
+		this.resp = resp;
 	}
 
 	/**
-	 * 登录
-	 * 
-	 * @param phone 电话
-	 * @param password 密码
-	 * @return 响应对象
-	 * @throws YungeException
+	 * 任务执行前
 	 */
-	public ApiResponse login(String phone, String password) throws YungeException {
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+	}
 
+	/**
+	 * 后台任务
+	 * 
+	 * @param params
+	 * @return
+	 */
+	@Override
+	protected ApiResponse doInBackground(String... params) {
+
+		String phone = params[0];
+		String password = params[1];
 		String url = URL_FORMATE.format(new String[] { phone, password });
 
 		// 创建可关闭的httpclient
@@ -63,26 +54,16 @@ public class Login implements Callable<ApiResponse> {
 		httpGet.addHeader("Content-Type", "application/json;charset=utf-8");
 		httpGet.addHeader("Accept-Charset", "UTF-8");
 
-		// 设置请求内容
-		// StringEntity se = new StringEntity("{abc:你好}",
-		// ContentType.APPLICATION_JSON);
-		// httpPost.setEntity(se);
+		// 创建http响应对象
+		CloseableHttpResponse response = null;
 
-		// 打印所有的http请求头（仅测试需要）
-		// HeaderIterator it = httpGet.headerIterator();
-		// while (it.hasNext()) {
-		// System.out.println(it.next());
-		// }
-
-		// httpclient执行请求，返回响应对象
-		CloseableHttpResponse response;
-
+		// 执行http请求
 		try {
 			HttpUriRequest request = new HttpGet(url);
 			response = client.execute(request);
 		}
 		catch (IOException e) {
-			throw new YungeException("http请求出错" + e);
+			e.printStackTrace();
 		}
 		// 读取响应体
 		StringBuilder sb = new StringBuilder();
@@ -112,23 +93,23 @@ public class Login implements Callable<ApiResponse> {
 			client.close();
 		}
 		catch (IOException e) {
-			throw new YungeException("关闭对象出错", e);
+			e.printStackTrace();
 		}
-		// 创建键值对，类似map。android里叫bundle。存入apiResponse对象
-		Bundle bundle = new Bundle();
-		bundle.putSerializable(EXTRA_BUNDLE_APIRESPONSE, apiResponse);
-		// 创建消息对象，存入bundle数据。
-		Message message = new Message();
-		message.setData(bundle);
-		// 发送消息。hanler是主线程的handler，所以消息发给了主线程，由主线程的消息处理方法接收处理
-		handler.sendMessage(message);
 
 		return apiResponse;
 	}
 
+	/**
+	 * @param values
+	 */
 	@Override
-	public ApiResponse call() throws Exception {
-		return login(phone, password);
+	protected void onProgressUpdate(Integer... values) {
+		super.onProgressUpdate(values);
 	}
 
+	@Override
+	protected void onPostExecute(ApiResponse result) {
+		super.onPostExecute(result);
+
+	}
 }

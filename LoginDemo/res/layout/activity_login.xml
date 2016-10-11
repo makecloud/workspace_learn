@@ -1,89 +1,192 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/background_login">
-    <!-- padding 内边距   layout_margin 外边距
-  		android:layout_alignParentTop 布局的位置是否处于顶部 -->
-  		
-  	<RelativeLayout 
-  	    android:id="@+id/login_div"
-  	    android:layout_width="fill_parent"
-  		android:layout_height="wrap_content"
-  		android:padding="15dip"        
-    	android:layout_margin="15dip" 
-    	android:background="@drawable/background_login_div_bg" >
-  		<!-- 账号 -->
-    	<TextView 
-    		android:id="@+id/login_user_input"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:layout_alignParentTop="true"
-    		android:layout_marginTop="5dp"
-    		android:text="@string/login_label_username"
-    		style="@style/normalText"/>
-    	<EditText 
-    		android:id="@+id/username_edit"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-    		android:hint="@string/login_username_hint"
-    		android:layout_below="@id/login_user_input"
-    		android:singleLine="true"
-    		android:inputType="text"/>
-      <!-- 密码 text -->
-      <TextView 
-      	android:id="@+id/login_password_input"
-      	android:layout_width="wrap_content"
-      	android:layout_height="wrap_content"
-      	android:layout_below="@id/username_edit"
-      	android:layout_marginTop="3dp"
-      	android:text="@string/login_label_password"
-      	style="@style/normalText"/>
-      <EditText 
-      	android:id="@+id/password_edit"
-      	android:layout_width="fill_parent"
-      	android:layout_height="wrap_content"
-      	android:layout_below="@id/login_password_input"
-      	android:password="true"
-      	android:singleLine="true"
-      	android:inputType="textPassword" />
-      <!-- 登录button -->
-      <Button 
-      	android:id="@+id/signin_button"
-      	android:layout_width="wrap_content"
-      	android:layout_height="wrap_content"
-      	android:layout_below="@id/password_edit"
-      	android:layout_alignRight="@id/password_edit"
-      	android:text="@string/login_label_signin"
-      	android:background="@drawable/blue_button" />
-  	</RelativeLayout>
-  
-  	<RelativeLayout 
-      	android:layout_width="fill_parent"
-      	android:layout_height="wrap_content" >
-     <TextView  android:id="@+id/register_link"
-         android:text="@string/login_register_link"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="15dp"
-         android:textColor="#888"
-         android:textColorLink="#FF0066CC" />
-    <ImageView android:id="@+id/miniTwitter_logo"
-        android:src="@drawable/cat"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true" >
+   
+    <RelativeLayout
+        android:id="@+id/login_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center" >
+
+        <!-- 云歌logo -->
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/logo_login"
+            android:scaleType="fitXY" />
+
+        <!-- 用户名布局 -->
+
+        <FrameLayout
+            android:id="@+id/username_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:gravity="center" >
+
+            <!-- 用户名输入框 -->
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/default_edittext_height"
+                android:layout_marginTop="5dp"
+                android:hint="帐号"
+                android:inputType="number"
+                android:maxLength="20"
+                android:paddingLeft="55dp"
+                android:paddingRight="60dp" />
+
+            <!-- 用户图标 -->
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/login_usr_in_img"
+                android:visibility="visible" />
+            <!-- 文本显示 （应该是显示电话号码所属地区） -->
+
+            <TextView
+                android:id="@+id/contry_sn"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="+62"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:visibility="invisible" />
+            <!-- 清空内容按钮 -->
+
+            <Button
+                android:id="@+id/bt_username_clear"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_clear"
+                android:visibility="invisible" />
+        </FrameLayout>
+        <!-- 密码布局 -->
+
+        <FrameLayout
+            android:id="@+id/usercode_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_layout"
+            android:layout_marginTop="6dp"
+            android:gravity="center" >
+
+            <!-- 密码输入框 -->
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/default_edittext_height"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:paddingLeft="55dp"
+                android:paddingRight="60dp" >
+
+            </EditText>
+            <!-- 密码图标 -->
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="22dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/login_code_in_img" />
+            <!-- 显示密文按钮 -->
+
+            <Button
+                android:id="@+id/bt_pwd_eye"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/eye_open" />
+            <!-- 清空内容按钮 -->
+
+            <Button
+                android:id="@+id/bt_pwd_clear"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="33dp"
+                android:background="@drawable/button_clear"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <!-- 登录按钮 -->
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_below="@id/usercode_layout"
+            android:layout_marginTop="30dp"
+            android:background="#ff336699"
+            android:gravity="center"
+            android:text="登录"
+            android:textColor="@android:color/white" />
+        <!-- 忘记密码按钮 -->
+
+        <Button
+            android:id="@+id/login_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/loginButton"
+            android:layout_below="@id/loginButton"
+            android:background="#00000000"
+            android:text="忘记密码"
+            android:textSize="16sp" />
+        <!-- 注册按钮 -->
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/loginButton"
+            android:layout_below="@id/loginButton"
+            android:background="#00000000"
+            android:gravity="left|center_vertical"
+            android:text="注册"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        
+    </RelativeLayout>
+
+    <!-- 下面一行文字 -->
+    <!-- <RelativeLayout
+        android:id="@+id/remember_layout000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="25dp" />
-    <ImageView android:src="@drawable/logo"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_toLeftOf="@id/miniTwitter_logo"
-      android:layout_alignBottom="@id/miniTwitter_logo"
-      android:paddingBottom="8dp"/>
-  	</RelativeLayout>
-</LinearLayout>
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" >
+        <Button
+            android:id="@+id/registfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="AnyLife,Make the world a better place."
+            android:textSize="16sp"
+            android:visibility="visible" />
+    </RelativeLayout> -->
+</RelativeLayout>

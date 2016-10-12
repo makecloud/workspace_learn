@@ -22,13 +22,14 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.criminalintent.R;
-import com.example.criminalintent.crimedetail.FragmentCrime;
 import com.example.criminalintent.crimedetail.ActivityCrimePager;
+import com.example.criminalintent.crimedetail.FragmentCrime;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
 
 /**
- * 显示行为列表的fragment
+ * 显示行为列表的LIstFragment
+ * crimes数组注入适配器（绑定数据集），listView从适配器获取每项视图.
  * 
  * @author liuyh 2016年9月21日
  */
@@ -43,30 +44,27 @@ public class FragmentCrimeList extends ListFragment {
 	 * fragment创建
 	 * 
 	 * @param savedInstanceState
-	 * @see android.app.Fragment#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		// 设置保留fragment，比如在设备旋转时
 		setRetainInstance(true);
 		// 子标题显示状态为false
 		subtitleVisible = false;
-
 		// 设置有操作栏菜单
 		setHasOptionsMenu(true);
 		// 给activity设置标题
 		getActivity().setTitle(R.string.crime_title);
 		// 获取行为列表实例
 		crimes = (ArrayList<Crime>) CrimeLab.getIntance(getActivity()).getCrimes();
-		// 定义adapter，此adapter使用一个android自带的列表布局xml作为fragment对应的布局xml
+		// 创建adapter，传入crimes数组，此adapter使用一个android自带的列表布局xml作为ListView每项的视图
 		// ArrayAdapter<Crime> adapter = new ArrayAdapter<>(getActivity(),
 		// android.R.layout.simple_list_item_1, crimes);
+		// 创建adapter。传入crimes数组对象，用来获取listView的每项
 		CrimeAdapter adapter = new CrimeAdapter(crimes);
-		// 设置adapter为此fragment的adapter
+		// 设置ListFragment的适配器，listView会调用适配器获取将要显示的的每项（每个项是个视图对象）
 		setListAdapter(adapter);
-
 	}
 
 	/**
@@ -76,25 +74,18 @@ public class FragmentCrimeList extends ListFragment {
 	 * @param container
 	 * @param savedInstanceState
 	 * @return
-	 * @see android.app.ListFragment#onCreateView(android.view.LayoutInflater,
-	 *      android.view.ViewGroup, android.os.Bundle)
-	 */
-	/**
-	 * @param inflater
-	 * @param container
-	 * @param savedInstanceState
-	 * @return
-	 * @see android.app.ListFragment#onCreateView(android.view.LayoutInflater,
-	 *      android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// 这里并没有创建布局xml文件，用inflate画视图实例。
+		// 因为下面的super.onCreateView创建了默认布局视图。默认布局视图又包含一个listView视图。
+		// 暂时先使用默认创建的布局视图v
 		View v = super.onCreateView(inflater, container, savedInstanceState);
 		// 在旋转后不执行onCreate，而执行onCreateView，所以在create方法里显示子标题，遇到设备旋转，子标题不显示
 		if (subtitleVisible) {
 			getActivity().getActionBar().setSubtitle(R.string.subtitle);
 		}
-		// 获取列表视图
+		// 从默认创建的布局视图中获取列表组件
 		ListView listView = (ListView) v.findViewById(android.R.id.list);
 
 		// 判断sdk版本，大于honeycomb时使用setChoiceMode方法
@@ -151,14 +142,12 @@ public class FragmentCrimeList extends ListFragment {
 	}
 
 	/**
-	 * 点击列表项事件de 逻辑
+	 * 点击列表项事件的 逻辑
 	 * 
 	 * @param l
 	 * @param v
 	 * @param position
 	 * @param id
-	 * @see android.app.ListFragment#onListItemClick(android.widget.ListView,
-	 *      android.view.View, int, long)
 	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
@@ -177,8 +166,6 @@ public class FragmentCrimeList extends ListFragment {
 
 	/**
 	 * 生命周期中->暂停阶段
-	 * 
-	 * @see android.app.Fragment#onPause()
 	 */
 	@Override
 	public void onPause() {
@@ -188,8 +175,6 @@ public class FragmentCrimeList extends ListFragment {
 
 	/**
 	 * 恢复fragment
-	 * 
-	 * @see android.app.Fragment#onResume()
 	 */
 	@Override
 	public void onResume() {
@@ -202,8 +187,6 @@ public class FragmentCrimeList extends ListFragment {
 	 * 
 	 * @param menu
 	 * @param inflater
-	 * @see android.app.Fragment#onCreateOptionsMenu(android.view.Menu,
-	 *      android.view.MenuInflater)
 	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -221,8 +204,6 @@ public class FragmentCrimeList extends ListFragment {
 	 * @param menu
 	 * @param v 从哪一个视图浮动起的浮动上下文菜单
 	 * @param menuInfo
-	 * @see android.app.Fragment#onCreateContextMenu(android.view.ContextMenu,
-	 *      android.view.View, android.view.ContextMenu.ContextMenuInfo)
 	 */
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
@@ -235,7 +216,6 @@ public class FragmentCrimeList extends ListFragment {
 	 * 
 	 * @param item
 	 * @return
-	 * @see android.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -281,51 +261,59 @@ public class FragmentCrimeList extends ListFragment {
 	}
 
 	/**
-	 * 内部类，定制的crime adapter类，用于让列表项显示定制的布局
+	 * 内部类，定制的crime 适配器类。
+	 * ListFragment包含的listView通过适配器来获取要显示的视图项。
+	 * 适配器需要传入一个数组对象，作为给listView控件的数据
+	 * 适配器包含生成视图项的方法。
 	 * 
 	 * @author liuyh 2016年9月21日
 	 */
 	private class CrimeAdapter extends ArrayAdapter<Crime> {
 
 		/**
-		 * 构造方法
+		 * 在构造方法传入作为listView控件的数据的数组
 		 * 
-		 * @param crimes
+		 * @param crimes数组
 		 */
 		public CrimeAdapter(ArrayList<Crime> crimes) {
+			// 传0作为布局资源id，代表不使用预定义布局
 			super(getActivity(), 0, crimes);
 		}
 
 		/**
-		 * 获得视图
+		 * 获得每个项的视图。
+		 * 这个方法是用来生成列表项每项中包含的控件
 		 * 
-		 * @param position
+		 * @param position listView的第几项
 		 * @param convertView
 		 * @param parent
 		 * @return
-		 * @see android.widget.ArrayAdapter#getView(int, android.view.View,
-		 *      android.view.ViewGroup)
 		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			// 生成将要转化为listView项的视图（这里使用了自己定义的布局文件生成视图）
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_crime,
 						null);
 			}
+			// 获取本adapter的数据（即crimes数组）中的项
 			Crime c = getItem(position);
 
-			TextView titleTextView = (TextView) convertView
-					.findViewById(R.id.crime_list_item_titleTextView);
-			titleTextView.setText(c.getTitle());
-			TextView dateTextView = (TextView) convertView
-					.findViewById(R.id.crime_list_item_dateTextView);
-			dateTextView.setText(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(c.getDate()));
-			CheckBox solvedcCheckBox = (CheckBox) convertView
+			// 视图组件引用
+			TextView titleTextView;
+			TextView dateTextView;
+			CheckBox solvedCheckBox;
+			// 获取视图组件实例
+			titleTextView = (TextView) convertView.findViewById(R.id.crime_list_item_titleTextView);
+			dateTextView = (TextView) convertView.findViewById(R.id.crime_list_item_dateTextView);
+			solvedCheckBox = (CheckBox) convertView
 					.findViewById(R.id.crime_list_item_solvedCheckBox);
-			solvedcCheckBox.setChecked(c.isSolved());
+			// 设置试图控件
+			titleTextView.setText(c.getTitle());
+			dateTextView.setText(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(c.getDate()));
+			solvedCheckBox.setChecked(c.isSolved());
 			return convertView;
 		}
-
 	}
 
 }

@@ -3,10 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="#E2F4C6">
+    android:showDividers="middle|end"
+    android:divider="@drawable/divider">
     
-	<TextView 
-        android:layout_width="wrap_content"
+
+    <!-- 显示云歌图片 -->
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/my_logo_background">
+
+	    <ImageView
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_gravity="center"
+	        android:layout_marginBottom="30dp"
+	        android:layout_marginLeft="85dp"
+	        android:layout_marginRight="85dp"
+	        android:layout_marginTop="30dp"
+	        android:scaleType="fitXY"
+	        android:src="@drawable/my_logo" />
+
+    </FrameLayout>
+    <!-- ListFragment自定义布局必须声明一个id为@id/android:list的ListView元素 -->
+    <ListView 
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="fragment_我的页"/>
+        android:drawSelectorOnTop="false">
+        
+    </ListView>
 </LinearLayout>

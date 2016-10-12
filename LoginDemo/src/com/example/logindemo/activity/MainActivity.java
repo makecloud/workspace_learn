@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// 隐藏操作栏action bar
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		// 设置操作栏标题：主界面
 		setTitle("主界面");
@@ -64,8 +67,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		// 获取上一个Activity传入数据
 		Intent in = getIntent();
 		String loginData = (String) in.getSerializableExtra("token");
-		noteTextView = (TextView) findViewById(R.id.note);
-		noteTextView.setText(loginData);
 
 	}
 
@@ -104,7 +105,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		chargeFragment = fm.findFragmentById(R.id.fragment_charge);
 		myFragment = fm.findFragmentById(R.id.fragment_my);
 		fragments = new Fragment[] { homeFragment, AdvFragment, chargeFragment, myFragment };
-
+		showFragment(0);
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.menu_mainactivity, menu);
 		return true;
 	}
 

@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.criminalintent.R;
-import com.example.criminalintent.crimedetail.FragmentCrime;
 import com.example.criminalintent.crimedetail.ActivityCrimePager;
 import com.example.criminalintent.crimedetail.ActivitySingleFragment;
+import com.example.criminalintent.crimedetail.FragmentCrime;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
 
@@ -22,9 +22,8 @@ public class ActivityCrimeList extends ActivitySingleFragment {
 	/**
 	 * ActivityManager创建菜单周期时调用此方法
 	 * 
-	 * @param menu
+	 * @param menu菜单对象
 	 * @return
-	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,9 +37,8 @@ public class ActivityCrimeList extends ActivitySingleFragment {
 	/**
 	 * 操作栏菜单项被选择
 	 * 
-	 * @param item
+	 * @param item菜单项对象
 	 * @return
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

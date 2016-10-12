@@ -74,7 +74,7 @@
 	<color name="darkgoldenrod">#B8860B</color><!--暗金黄色 -->   
 	<color name="firebrick">#B22222</color><!--火砖色 -->   
 	<color name="powderblue">#B0E0E6</color><!--粉蓝色 -->   
-	<color name="lightsteelblue">#B0C4DE</color><!--亮钢兰色 -->   
+	<color name="lightsteelblue">#B0C4DE</color><!--亮钢蓝色 -->   
 	<color name="paleturquoise">#AFEEEE</color><!--苍宝石绿 -->   
 	<color name="greenyellow">#ADFF2F</color><!--黄绿色 -->   
 	<color name="lightblue">#ADD8E6</color><!--亮蓝色 -->   
@@ -121,7 +121,6 @@
 	<color name="steelblue">#4682B4</color><!--钢兰色 -->   
 	<color name="royalblue">#4169E1</color><!--皇家蓝 -->   
 	<color name="turquoise">#40E0D0</color><!--青绿色 -->   
-	<color name="mediumseagreen">#3CB371</color><!--中海蓝 -->   
 	<color name="limegreen">#32CD32</color><!--橙绿色 -->   
 	<color name="darkslategray">#2F4F4F</color><!--暗瓦灰色 -->   
 	<color name="darkslategrey">#2F4F4F</color><!--暗瓦灰色 -->   

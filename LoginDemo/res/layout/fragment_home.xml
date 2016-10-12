@@ -4,6 +4,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:background="#DDDDDD">
+    <!-- 顶部栏 -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/royalblue">
+
+        <ImageView
+            android:id="@+id/back_searchpage"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/go_back" />
+
+        <EditText 
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/background_search_tv"
+            
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:hint="广告计划名称"/>
+        <TextView 
+            android:id="@+id/search_page_search"
+            android:text="搜索"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp"
+            android:textSize="18sp"
+             />
+        
+    </LinearLayout>
     
     <TextView 
         android:layout_width="wrap_content"

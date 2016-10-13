@@ -2,16 +2,13 @@ package com.example.criminalintent.crimedetail;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-
 import com.example.criminalintent.R;
-import com.example.criminalintent.R.id;
 import com.example.criminalintent.entity.Crime;
 import com.example.criminalintent.entity.CrimeLab;
 
@@ -21,6 +18,7 @@ import com.example.criminalintent.entity.CrimeLab;
  * @author liuyh 2016年9月22日
  */
 public class ActivityCrimePager extends FragmentActivity {
+
 	private ViewPager viewPager;
 	private ArrayList<Crime> crimes;
 
@@ -28,7 +26,6 @@ public class ActivityCrimePager extends FragmentActivity {
 	 * activity创建
 	 * 
 	 * @param savedInstanceState
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

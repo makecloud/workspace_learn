@@ -23,9 +23,14 @@ import cz.msebera.android.httpclient.impl.client.HttpClients;
  * 
  * @author liuyh 2016年10月8日
  */
+/**
+ * @author liuyh
+ *         2016年10月14日
+ */
 public class Login implements Callable<ApiResponse> {
 
 	/** 登录url常量 */
+	/**  */
 	private static final MessageFormat URL_FORMATE = new MessageFormat(
 			"http://192.168.1.151:8080/platform-mobile/system/login?phone={0}&password={1}");
 	/** 响应实体的键值常量 */

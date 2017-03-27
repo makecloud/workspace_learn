@@ -1,6 +1,8 @@
 #
 # A fatal error has been detected by the Java Runtime Environment:
 #
+#
+#
 #  Internal Error (javaClasses.cpp:136), pid=15036, tid=13276
 #  fatal error: Invalid layout of preloaded class
 #

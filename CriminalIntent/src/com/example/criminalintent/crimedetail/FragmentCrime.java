@@ -59,7 +59,7 @@ public class FragmentCrime extends Fragment {
 	private ImageButton cameraButton;
 
 	/**
-	 * 用此方法创建crimefragment实例，实现在创建实例时，绑定bundle到fragment
+	 * 用此方法创建crimefragment实例，实现在创建实例时，绑定bundle到fragment的argument
 	 * 
 	 * @param crimeId
 	 * @return
@@ -112,6 +112,24 @@ public class FragmentCrime extends Fragment {
 		// 用fragment_crime.xml布局绘制本fragment的视图
 		View view = inflater.inflate(R.layout.fragment_crime, container, false);
 
+		// 初始化视图控件
+		initView(view);
+
+		// -----设置控件属性，即时显示-----//
+		titleField.setText(crime.getTitle());
+		dateButton.setText(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(crime.getDate()));
+		solvedCheckBox.setChecked(crime.isSolved());
+
+		// 设置控件的事件监听逻辑
+		initEventListener();
+
+		return view;
+	}
+
+	/**
+	 * 初始化视图控件
+	 */
+	public void initView(View view) {
 		// ----- 获取控件 -----//
 		// 获取输入框
 		titleField = (EditText) view.findViewById(R.id.crime_title);
@@ -124,12 +142,12 @@ public class FragmentCrime extends Fragment {
 		photoImageView = (ImageView) view.findViewById(R.id.crime_imageView);
 		// 获取相机按钮
 		cameraButton = (ImageButton) view.findViewById(R.id.imageButton);
+	}
 
-		// -----设置控件属性，即时显示-----//
-		titleField.setText(crime.getTitle());
-		dateButton.setText(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(crime.getDate()));
-		solvedCheckBox.setChecked(crime.isSolved());
-
+	/**
+	 * 设置控件的事件逻辑
+	 */
+	public void initEventListener() {
 		// ----- 给事件绑定逻辑 -----//
 		// 给输入框设置文本改变事件监听逻辑
 		titleField.addTextChangedListener(new TextWatcher() {
@@ -192,12 +210,12 @@ public class FragmentCrime extends Fragment {
 				if (photeFilename == null) {
 					return;
 				}
+				// 获得fragmentmanager,然后调用dialogfragment的show方法，即将dialog显示出来
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				FragmentCrimePhotoDialog.getInstance(CrimeIO.getAppSDPath() + photeFilename).show(
 						fm, DIALOG_IMAGE);
 			}
 		});
-		return view;
 	}
 
 	/**
@@ -233,6 +251,7 @@ public class FragmentCrime extends Fragment {
 
 	/**
 	 * 从其他Activity返回此Activity时，调用
+	 * 本次为从dialogFragment返回、从相机activity返回
 	 * 
 	 * @param requestCode
 	 * @param resultCode

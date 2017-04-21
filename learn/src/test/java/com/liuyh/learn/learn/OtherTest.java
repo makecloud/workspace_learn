@@ -1,10 +1,10 @@
 package com.liuyh.learn.learn;
 
 import java.text.MessageFormat;
-
 import org.junit.Test;
 
 public class OtherTest {
+
 	@Test
 	public void testMessageFormat() {
 		MessageFormat urlFormat = new MessageFormat(
@@ -12,4 +12,5 @@ public class OtherTest {
 		String url = urlFormat.format(new String[] { "13588888888", "abdceken" });
 		System.out.println("url:" + url);
 	}
+
 }

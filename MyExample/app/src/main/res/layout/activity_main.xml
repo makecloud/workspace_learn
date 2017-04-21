@@ -126,6 +126,12 @@
                 android:layout_height="wrap_content"
                 android:text="使用recyclerview" />
 
+            <Button
+                android:id="@+id/btn_eg17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="使用des加密保存文件" />
+
         </LinearLayout>
     </ScrollView>
 

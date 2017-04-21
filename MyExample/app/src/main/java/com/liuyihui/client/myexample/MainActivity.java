@@ -16,6 +16,7 @@ import com.liuyihui.client.myexample.example13_viewflipper.UseViewFlipperActivit
 import com.liuyihui.client.myexample.example15_viewpager.UseViewPagerActivity;
 import com.liuyihui.client.myexample.example15_viewpager.ViewPagerFragmentActivity;
 import com.liuyihui.client.myexample.example16_recyclerview.Example16Activity;
+import com.liuyihui.client.myexample.example17_DESencrypt.TestDesActivity;
 import com.liuyihui.client.myexample.example2_pullToRefreshListView_demo.Example2Activity;
 import com.liuyihui.client.myexample.example3.Example3Activity;
 import com.liuyihui.client.myexample.example5_use_amap.BaseMapFragmentActivity;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button startExampleButton13;//使用viewpager实例
     private Button startExampleButton14;//使用viewpager+fragment实例
     private Button startExampleButton16;//使用recyclerview
+    private Button startExampleButton17;//使用des加密，保存文件，在读文件，解密
 
 
     @Override
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startExampleButton13 = (Button) findViewById(R.id.btn_eg13);
         startExampleButton14 = (Button) findViewById(R.id.btn_eg14);
         startExampleButton16 = (Button) findViewById(R.id.btn_eg16);
+        startExampleButton17 = (Button) findViewById(R.id.btn_eg17);
 
         //设置事件
         startExampleButton1.setOnClickListener(this);
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startExampleButton13.setOnClickListener(this);
         startExampleButton14.setOnClickListener(this);
         startExampleButton16.setOnClickListener(this);
+        startExampleButton17.setOnClickListener(this);
     }
 
     /**
@@ -170,6 +174,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_eg16:
                 i = new Intent(this, Example16Activity.class);
+                startActivity(i);
+                break;
+            case R.id.btn_eg17:
+                i = new Intent(this, TestDesActivity.class);
                 startActivity(i);
                 break;
             default:
